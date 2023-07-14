@@ -17,6 +17,18 @@
     <Filter Include="Engine\01. Header">
       <UniqueIdentifier>{b1e05879-024d-4312-9304-4f045fe97074}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Manager">
+      <UniqueIdentifier>{9a794b59-a14f-45c8-9da4-d1899e9a3d43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Manager\CKeyMgr">
+      <UniqueIdentifier>{82fb9553-9758-484a-a449-01b910dfb9ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04. Object">
+      <UniqueIdentifier>{7a90164a-dbce-4f30-87b4-6bbad10a3f8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Manager\CTimeMgr">
+      <UniqueIdentifier>{a706651e-7465-4848-9113-bc1a5763c652}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssortrockWinAPI.h">
@@ -34,13 +46,36 @@
     <ClInclude Include="CCore.h">
       <Filter>Engine\02. Core</Filter>
     </ClInclude>
+    <ClInclude Include="define.h">
+      <Filter>Engine\01. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CKeyMgr.h">
+      <Filter>Engine\03. Manager\CKeyMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="CObject.h">
+      <Filter>Engine\04. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="struct.h">
+      <Filter>Engine\01. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CTimeMgr.h">
+      <Filter>Engine\03. Manager\CTimeMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AssortrockWinAPI.cpp">
-      <Filter>Default</Filter>
-    </ClCompile>
     <ClCompile Include="CCore.cpp">
       <Filter>Engine\02. Core</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp" />
+    <ClCompile Include="CObject.cpp">
+      <Filter>Engine\04. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CKeyMgr.cpp">
+      <Filter>Engine\03. Manager\CKeyMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CTimeMgr.cpp">
+      <Filter>Engine\03. Manager\CTimeMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

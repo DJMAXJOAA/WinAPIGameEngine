@@ -1,30 +1,21 @@
 #pragma once
+// 싱글톤 : 두가지 방법 -> 데이터 영역 사용, 동적 할당
+
 class CCore
 {
+	SINGLE(CCore);
 private:
-	static CCore* g_pInst;
+	HWND    m_hWnd;			// 메인 윈도우 핸들
+	POINT   m_ptResolution;	// 해상도 정보
+	HDC		m_hDC;			// 메인 윈도우에 Draw할 DC
 
 public:
-	static CCore* GetInstance()
-	{
-		// 최초 호출 ( 단 한번만 힙영역에 동적할당 )
-		if (g_pInst == nullptr)
-		{
-			g_pInst = new CCore;
-		}
+	int Init(HWND hWnd, POINT ptResolution);
+	void Progress();
 
-		// 2번 이상 호출 (포인터만 반환)
-		return g_pInst;
-	}
-
-	static void Release()
-	{
-		if (nullptr != g_pInst)
-		{
-			delete g_pInst;
-			g_pInst = nullptr;
-		}
-	}
+private:
+	void Update();
+	void Render();
 
 private:
 	CCore();

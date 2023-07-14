@@ -1,8 +1,11 @@
 ﻿// AssortrockWinAPI.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
 
+#include "pch.h"
 #include "framework.h"
 #include "AssortrockWinAPI.h"
+
+#include "CCore.h"
 
 #define MAX_LOADSTRING 100
 
@@ -10,6 +13,7 @@
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
+HWND hWnd;
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -25,26 +29,29 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
-	// TODO: 여기에 코드를 입력합니다.
-
-	// 전역 문자열을 초기화합니다.
 	LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
 	LoadStringW(hInstance, IDC_ASSORTROCKWINAPI, szWindowClass, MAX_LOADSTRING);
+
+	// 윈도우 정보 등록
 	MyRegisterClass(hInstance);
 
-	// 애플리케이션 초기화를 수행합니다:
+	// 윈도우 생성
 	if (!InitInstance(hInstance, nCmdShow))
 	{
+		return FALSE;
+	}
+
+	// 1. 코어 객체 생성 후, 초기화
+	if (FAILED(CCore::GetInstance()->Init(hWnd, POINT{ 1280, 768 })))
+	{
+		MessageBox(nullptr, L"Core객체 초기화 실패", L"ERROR", MB_OK);
+
 		return FALSE;
 	}
 
 	HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_ASSORTROCKWINAPI));
 
 	MSG msg;
-
-	DWORD dwPrevCount = GetTickCount();
-	int iMsgCheck = 0;
-	int iNoneMsgCheck = 0;
 
 	while (1)
 	{
@@ -60,6 +67,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 		else
 		{
+			CCore::GetInstance()->Progress(); // 2. 코어 객체의 실행 부분
 		}
 	}
 
@@ -106,7 +114,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
 	hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
-	HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+	hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
 	if (!hWnd)
@@ -156,6 +164,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		PAINTSTRUCT ps;
 		HDC hdc = BeginPaint(hWnd, &ps);
 		// TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+
+		// TODO: 여기까지 그리세요
 		EndPaint(hWnd, &ps);
 	}
 	break;
