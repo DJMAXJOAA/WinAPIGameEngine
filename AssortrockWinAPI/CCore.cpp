@@ -42,6 +42,7 @@ void CCore::Progress()
 	//	callcount = 0;
 	//}
 
+	CTimeMgr::GetInstance()->Update();
 	Update();
 	Render();
 }
@@ -52,19 +53,19 @@ void CCore::Update()
 
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
 	{
-		vPos.x -= 0.01;
+		vPos.x -= 400.f * CTimeMgr::GetInstance()->GetfDT();
 	}
 	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
 	{
-		vPos.x += 0.01;
+		vPos.x += 400.f * CTimeMgr::GetInstance()->GetfDT();
 	}
 	if (GetAsyncKeyState(VK_UP) & 0x8000)
 	{
-		vPos.y -= 0.01;
+		vPos.y -= 400.f * CTimeMgr::GetInstance()->GetfDT();
 	}
 	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
 	{
-		vPos.y += 0.01;
+		vPos.y += 400.f * CTimeMgr::GetInstance()->GetfDT();
 	}
 
 	g_obj.SetPos(vPos);

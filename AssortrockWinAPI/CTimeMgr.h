@@ -8,15 +8,20 @@ private:
 	LARGE_INTEGER	m_liPrevCount;
 	LARGE_INTEGER	m_liFrequency;
 
-	double			m_dDT; // 한 프레임당 시간값
-	decltype		m_dAcc; // 누적 시간
+	double			m_dDT;	// 한 프레임당 시간값
+	double			m_dAcc;	// 누적 시간
 	UINT			m_iCallCount;
+	UINT			m_iFPS;
 
 public:
 	void Init();
 	void Update();
 
 public:
+	double GetDT() { return m_dDT; }
+	float GetfDT() { return (float)m_dDT; }
+
+private:
 	CTimeMgr();
 	~CTimeMgr();
 };

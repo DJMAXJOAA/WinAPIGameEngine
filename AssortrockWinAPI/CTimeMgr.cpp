@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CTimeMgr.h"
+#include "CCore.h"
 
 void CTimeMgr::Init()
 {
@@ -22,8 +23,17 @@ void CTimeMgr::Update()
 	m_liPrevCount = m_liCurCount;
 
 	++m_iCallCount;
-	if (m_dAcc > 1.)
+	m_dAcc += m_dDT; // DT 누적
+
+	if (m_dAcc >= 1.) // 1초마다 한번 체크
 	{
+		m_iFPS = m_iCallCount;
+		m_dAcc = 0.;
+		m_iCallCount = 0;
+
+		wchar_t szBuffer[255] = {};
+		swprintf_s(szBuffer, L"FPS : %d, DT : %f", m_iFPS, m_dDT);
+		SetWindowText(CCore::GetInstance()->GetMainhWnd(), szBuffer); // 타이틀 지정
 	}
 }
 
