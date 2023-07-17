@@ -8,7 +8,7 @@ private:
 	HWND    m_hWnd;			// 메인 윈도우 핸들
 	POINT   m_ptResolution;	// 해상도 정보
 	HDC		m_hDC;			// 메인 윈도우에 Draw할 DC
-	
+
 	HBITMAP	m_hBit;
 	HDC		m_memDC;		// 더블 버퍼링
 

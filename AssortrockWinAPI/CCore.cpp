@@ -52,7 +52,6 @@ void CCore::Progress()
 	CTimeMgr::GetInstance()->Update();
 	CKeyMgr::GetInstance()->Update();
 
-
 	Update();
 	Render();
 }
@@ -61,19 +60,19 @@ void CCore::Update()
 {
 	Vec2 vPos = g_obj.GetPos();
 
-	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+	if (CKeyMgr::GetInstance()->GetKeyState(KEY::LEFT) == KEY_STATE::HOLD)
 	{
 		vPos.x -= 400.f * CTimeMgr::GetInstance()->GetfDT();
 	}
-	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+	if (CKeyMgr::GetInstance()->GetKeyState(KEY::RIGHT) == KEY_STATE::HOLD)
 	{
 		vPos.x += 400.f * CTimeMgr::GetInstance()->GetfDT();
 	}
-	if (GetAsyncKeyState(VK_UP) & 0x8000)
+	if (CKeyMgr::GetInstance()->GetKeyState(KEY::UP) == KEY_STATE::HOLD)
 	{
 		vPos.y -= 400.f * CTimeMgr::GetInstance()->GetfDT();
 	}
-	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+	if (CKeyMgr::GetInstance()->GetKeyState(KEY::DOWN) == KEY_STATE::HOLD)
 	{
 		vPos.y += 400.f * CTimeMgr::GetInstance()->GetfDT();
 	}

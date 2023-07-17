@@ -32,7 +32,7 @@ enum class KEY
 	CTRL,
 	ENTER,
 	ESC,
-	
+
 	LAST // ³¡
 };
 
@@ -59,7 +59,10 @@ private:
 public:
 	void Init();
 	void Update();
-	
+
+public:
+	KEY_STATE GetKeyState(KEY _eKey) { return m_vecKey[(int)_eKey].eState; }
+
 public:
 	CKeyMgr();
 	~CKeyMgr();

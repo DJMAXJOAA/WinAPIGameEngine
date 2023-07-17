@@ -1,11 +1,13 @@
 #include "pch.h"
 #include "CKeyMgr.h"
 
+#include "CCore.h"
+
 int g_arrVK[(int)KEY::LAST]
 {
 	VK_LEFT,
 	VK_RIGHT,
-	VK_UP, 
+	VK_UP,
 	VK_DOWN,
 	'Q',
 	'W',
@@ -47,38 +49,66 @@ void CKeyMgr::Init()
 
 void CKeyMgr::Update()
 {
-	for (int i = 0; i < (int)KEY::LAST; i++)
+	// 윈도우 활성시에만 키입력 상태
+	HWND hMainWnd = CCore::GetInstance()->GetMainhWnd();
+	HWND hWnd = GetFocus();
+
+	/*if (hWnd == hMainWnd)*/
+	if (hWnd != nullptr)
 	{
-		// 키가 눌려있음
-		if (GetAsyncKeyState(g_arrVK[i]) & 0x8000)
+		for (int i = 0; i < (int)KEY::LAST; i++)
 		{
-			// 이전에도 눌리고 있었음
-			if (m_vecKey[i].bPrevPush)
+			// 키가 눌려있음
+			if (GetAsyncKeyState(g_arrVK[i]) & 0x8000)
 			{
-				m_vecKey[i].eState = KEY_STATE::HOLD;
+				// 이전에도 눌리고 있었음
+				if (m_vecKey[i].bPrevPush)
+				{
+					m_vecKey[i].eState = KEY_STATE::HOLD;
+				}
+				// 이번에 새로 눌림
+				else
+				{
+					m_vecKey[i].eState = KEY_STATE::TAP;
+				}
+				m_vecKey[i].bPrevPush = true;
 			}
-			// 이번에 새로 눌림
+
+			// 키가 안눌러져있음
 			else
 			{
-				m_vecKey[i].eState = KEY_STATE::TAP;
+				// 이전엔 눌려져 있었음(지금 뗐음)
+				if (m_vecKey[i].bPrevPush)
+				{
+					m_vecKey[i].eState = KEY_STATE::AWAY;
+				}
+				// 이전에도 떼져있었음
+				else
+				{
+					m_vecKey[i].eState = KEY_STATE::NONE;
+				}
+				m_vecKey[i].bPrevPush = false;
 			}
-			m_vecKey[i].bPrevPush = true;
 		}
+	}
 
-		// 키가 안눌러져있음
-		else
+	// 윈도우 포커싱 해제 상태
+	else
+	{
+		for (int i = 0; i < (int)KEY::LAST; ++i)
 		{
-			// 이전엔 눌려져 있었음(지금 뗐음)
-			if (m_vecKey[i].bPrevPush)
+			m_vecKey[i].bPrevPush = false;
+			// 눌렀거나 누르고 있는 상태면 자동으로 떼지게 하기
+			if (KEY_STATE::TAP == m_vecKey[i].eState
+				|| KEY_STATE::HOLD == m_vecKey[i].eState)
 			{
 				m_vecKey[i].eState = KEY_STATE::AWAY;
 			}
-			// 이전에도 떼져있었음
-			else
+			// 떼지고 있는 상태라면, NONE으로 가게 하기
+			if (KEY_STATE::AWAY == m_vecKey[i].eState)
 			{
 				m_vecKey[i].eState = KEY_STATE::NONE;
 			}
-			m_vecKey[i].bPrevPush = false;
 		}
 	}
 }
