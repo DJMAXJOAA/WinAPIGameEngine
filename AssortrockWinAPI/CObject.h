@@ -14,6 +14,10 @@ public:
 	Vec2 GetScale() { return m_vScale; }
 
 public:
+	void Update();
+	void Render(HDC hdc);
+
+public:
 	CObject();
 	virtual ~CObject();
 };

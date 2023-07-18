@@ -39,23 +39,24 @@ int CCore::Init(HWND hWnd, POINT ptResolution)
 
 void CCore::Progress()
 {
-	// 시간체크
-	//static int callcount = 0;
-	//++callcount;
-	//static int iPrevCount = GetTickCount();
-
-	//int iCurCount = GetTickCount();
-	//if (iCurCount - iPrevCount > 1000)
-	//{
-	//	iPrevCount = iCurCount;
-	//	callcount = 0;
-	//}
-
 	CTimeMgr::GetInstance()->Update();
 	CKeyMgr::GetInstance()->Update();
+	CSceneMgr::GetInstance()->Update();
 
-	Update();
-	Render();
+	// ==========
+	// 렌더링 과정
+	// ==========
+
+	// 화면 클리어
+	Rectangle(m_memDC, -1, -1, m_ptResolution.x + 1, m_ptResolution.y + 1);
+
+	// 화면 그리기
+	CSceneMgr::GetInstance()->Render(m_memDC);
+
+	// 두번째 버퍼에서 첫번째 버퍼(실제로 표시되는 화면)에 복사->붙여넣기
+	BitBlt(m_hDC, 0, 0, m_ptResolution.x, m_ptResolution.y, m_memDC, 0, 0, SRCCOPY);
+
+	// 씬 렌더링
 }
 
 void CCore::Update()
@@ -84,20 +85,7 @@ void CCore::Update()
 
 void CCore::Render()
 {
-	// 두번째 버퍼의 화면 초기화
-	Rectangle(m_memDC, -1, -1, m_ptResolution.x + 1, m_ptResolution.y + 1);
 
-	// 두번째 버퍼에서 그리기
-	Vec2 vPos = g_obj.GetPos();
-	Vec2 vScale = g_obj.GetScale();
-	Rectangle(m_memDC,
-		int(vPos.x - vScale.x / 2.f),
-		int(vPos.y - vScale.y / 2.f),
-		int(vPos.x + vScale.x / 2.f),
-		int(vPos.y + vScale.y / 2.f));
-
-	// 두번째 버퍼에서 첫번째 버퍼(실제로 표시되는 화면)에 복사->붙여넣기
-	BitBlt(m_hDC, 0, 0, m_ptResolution.x, m_ptResolution.y, m_memDC, 0, 0, SRCCOPY);
 }
 
 CCore::CCore()
