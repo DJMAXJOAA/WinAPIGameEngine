@@ -29,6 +29,15 @@
     <Filter Include="Engine\03. Manager\CTimeMgr">
       <UniqueIdentifier>{a706651e-7465-4848-9113-bc1a5763c652}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\05. Scene">
+      <UniqueIdentifier>{395cb876-2188-4326-afe3-f5fba5840405}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Manager\CSceneMgr">
+      <UniqueIdentifier>{c231642b-7ef7-4ef9-9f55-af9237f94dc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\05. Scene\CScene_Start">
+      <UniqueIdentifier>{c924dcf1-afc6-40c6-ab9e-6c5298c7052f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssortrockWinAPI.h">
@@ -62,6 +71,15 @@
     <ClInclude Include="CTimeMgr.h">
       <Filter>Engine\03. Manager\CTimeMgr</Filter>
     </ClInclude>
+    <ClInclude Include="CScene.h">
+      <Filter>Engine\05. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CSceneMgr.h">
+      <Filter>Engine\03. Manager\CSceneMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CScene_Start.h">
+      <Filter>Engine\05. Scene\CScene_Start</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp">
@@ -76,6 +94,15 @@
     </ClCompile>
     <ClCompile Include="CTimeMgr.cpp">
       <Filter>Engine\03. Manager\CTimeMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene.cpp">
+      <Filter>Engine\05. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneMgr.cpp">
+      <Filter>Engine\03. Manager\CSceneMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene_Start.cpp">
+      <Filter>Engine\05. Scene\CScene_Start</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
