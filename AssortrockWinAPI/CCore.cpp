@@ -5,8 +5,6 @@
 #include "CSceneMgr.h"
 #include "CObject.h"
 
-CObject g_obj;
-
 int CCore::Init(HWND hWnd, POINT ptResolution)
 {
 	m_hWnd = hWnd;
@@ -31,9 +29,6 @@ int CCore::Init(HWND hWnd, POINT ptResolution)
 	CKeyMgr::GetInstance()->Init();
 	CSceneMgr::GetInstance()->Init();
 
-	g_obj.SetPos(Vec2((float)(m_ptResolution.x / 2), (float)(m_ptResolution.y / 2)));
-	g_obj.SetScale(Vec2(100, 100));
-
 	return S_OK;
 }
 
@@ -43,9 +38,9 @@ void CCore::Progress()
 	CKeyMgr::GetInstance()->Update();
 	CSceneMgr::GetInstance()->Update();
 
-	// ==========
+	//============
 	// 렌더링 과정
-	// ==========
+	//============
 
 	// 화면 클리어
 	Rectangle(m_memDC, -1, -1, m_ptResolution.x + 1, m_ptResolution.y + 1);
@@ -55,37 +50,6 @@ void CCore::Progress()
 
 	// 두번째 버퍼에서 첫번째 버퍼(실제로 표시되는 화면)에 복사->붙여넣기
 	BitBlt(m_hDC, 0, 0, m_ptResolution.x, m_ptResolution.y, m_memDC, 0, 0, SRCCOPY);
-
-	// 씬 렌더링
-}
-
-void CCore::Update()
-{
-	Vec2 vPos = g_obj.GetPos();
-
-	if (CKeyMgr::GetInstance()->GetKeyState(KEY::LEFT) == KEY_STATE::HOLD)
-	{
-		vPos.x -= 400.f * CTimeMgr::GetInstance()->GetfDT();
-	}
-	if (CKeyMgr::GetInstance()->GetKeyState(KEY::RIGHT) == KEY_STATE::HOLD)
-	{
-		vPos.x += 400.f * CTimeMgr::GetInstance()->GetfDT();
-	}
-	if (CKeyMgr::GetInstance()->GetKeyState(KEY::UP) == KEY_STATE::HOLD)
-	{
-		vPos.y -= 400.f * CTimeMgr::GetInstance()->GetfDT();
-	}
-	if (CKeyMgr::GetInstance()->GetKeyState(KEY::DOWN) == KEY_STATE::HOLD)
-	{
-		vPos.y += 400.f * CTimeMgr::GetInstance()->GetfDT();
-	}
-
-	g_obj.SetPos(vPos);
-}
-
-void CCore::Render()
-{
-
 }
 
 CCore::CCore()

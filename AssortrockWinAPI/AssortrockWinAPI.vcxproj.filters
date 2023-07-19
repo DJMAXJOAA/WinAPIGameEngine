@@ -20,23 +20,32 @@
     <Filter Include="Engine\03. Manager">
       <UniqueIdentifier>{9a794b59-a14f-45c8-9da4-d1899e9a3d43}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\03. Manager\CKeyMgr">
-      <UniqueIdentifier>{82fb9553-9758-484a-a449-01b910dfb9ee}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\04. Object">
       <UniqueIdentifier>{7a90164a-dbce-4f30-87b4-6bbad10a3f8a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\03. Manager\CTimeMgr">
-      <UniqueIdentifier>{a706651e-7465-4848-9113-bc1a5763c652}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\05. Scene">
       <UniqueIdentifier>{395cb876-2188-4326-afe3-f5fba5840405}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\03. Manager\CSceneMgr">
+    <Filter Include="Engine\04. Object\NewFilter3">
+      <UniqueIdentifier>{9b9cbf5a-3715-455b-80ce-a73dd86e6fc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04. Object\Player">
+      <UniqueIdentifier>{4ac38a31-89f0-4b11-ab28-29ffed116a3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Manager\KeyManger">
+      <UniqueIdentifier>{82fb9553-9758-484a-a449-01b910dfb9ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Manager\SceneManger">
       <UniqueIdentifier>{c231642b-7ef7-4ef9-9f55-af9237f94dc5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\05. Scene\CScene_Start">
+    <Filter Include="Engine\03. Manager\TimeManger">
+      <UniqueIdentifier>{a706651e-7465-4848-9113-bc1a5763c652}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\05. Scene\Scene_Start">
       <UniqueIdentifier>{c924dcf1-afc6-40c6-ab9e-6c5298c7052f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04. Object\Monster">
+      <UniqueIdentifier>{114dca6c-47a3-4619-b1d4-91f63a4bbf11}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -59,7 +68,7 @@
       <Filter>Engine\01. Header</Filter>
     </ClInclude>
     <ClInclude Include="CKeyMgr.h">
-      <Filter>Engine\03. Manager\CKeyMgr</Filter>
+      <Filter>Engine\03. Manager\KeyManger</Filter>
     </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="CObject.h">
@@ -69,16 +78,22 @@
       <Filter>Engine\01. Header</Filter>
     </ClInclude>
     <ClInclude Include="CTimeMgr.h">
-      <Filter>Engine\03. Manager\CTimeMgr</Filter>
+      <Filter>Engine\03. Manager\TimeManger</Filter>
     </ClInclude>
     <ClInclude Include="CScene.h">
       <Filter>Engine\05. Scene</Filter>
     </ClInclude>
     <ClInclude Include="CSceneMgr.h">
-      <Filter>Engine\03. Manager\CSceneMgr</Filter>
+      <Filter>Engine\03. Manager\SceneManger</Filter>
     </ClInclude>
     <ClInclude Include="CScene_Start.h">
-      <Filter>Engine\05. Scene\CScene_Start</Filter>
+      <Filter>Engine\05. Scene\Scene_Start</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer.h">
+      <Filter>Engine\04. Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonster.h">
+      <Filter>Engine\04. Object\Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -90,19 +105,25 @@
       <Filter>Engine\04. Object</Filter>
     </ClCompile>
     <ClCompile Include="CKeyMgr.cpp">
-      <Filter>Engine\03. Manager\CKeyMgr</Filter>
+      <Filter>Engine\03. Manager\KeyManger</Filter>
     </ClCompile>
     <ClCompile Include="CTimeMgr.cpp">
-      <Filter>Engine\03. Manager\CTimeMgr</Filter>
+      <Filter>Engine\03. Manager\TimeManger</Filter>
     </ClCompile>
     <ClCompile Include="CScene.cpp">
       <Filter>Engine\05. Scene</Filter>
     </ClCompile>
     <ClCompile Include="CSceneMgr.cpp">
-      <Filter>Engine\03. Manager\CSceneMgr</Filter>
+      <Filter>Engine\03. Manager\SceneManger</Filter>
     </ClCompile>
     <ClCompile Include="CScene_Start.cpp">
-      <Filter>Engine\05. Scene\CScene_Start</Filter>
+      <Filter>Engine\05. Scene\Scene_Start</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer.cpp">
+      <Filter>Engine\04. Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonster.cpp">
+      <Filter>Engine\04. Object\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

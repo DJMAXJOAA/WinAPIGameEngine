@@ -16,12 +16,9 @@ public:
 	int Init(HWND hWnd, POINT ptResolution);
 	void Progress();
 
-private:
-	void Update();
-	void Render();
-
 public:
 	HWND GetMainhWnd() { return m_hWnd; }
+	POINT GetResolution() { return m_ptResolution; }
 
 private:
 	CCore();
