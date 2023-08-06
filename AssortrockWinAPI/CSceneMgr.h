@@ -5,17 +5,21 @@ class CScene;
 class CSceneMgr
 {
 	SINGLE(CSceneMgr);
+
 private:
 	CScene* m_arrScene[(UINT)SCENE_TYPE::END];
 	CScene* m_pCurScene;
+
+private:
+	CSceneMgr();
+	~CSceneMgr();
 	
 public:
 	void Init();
 	void Update();
 	void Render(HDC hdc);
 
-private:
-	CSceneMgr();
-	~CSceneMgr();
+public:
+	CScene* GetcurScene() { return m_pCurScene; }
 };
 

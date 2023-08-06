@@ -4,18 +4,49 @@
 #include "CKeyMgr.h"
 #include "CTimeMgr.h"
 
-void CObject::Render(HDC hdc)
-{
-	Rectangle(hdc, (int)(m_vPos.x - m_vScale.x / 2.f), (int)(m_vPos.y - m_vScale.y / 2.f),
-				   (int)(m_vPos.x + m_vScale.x / 2.f), (int)(m_vPos.y + m_vScale.y / 2.f));
-
-}
+#include "CCollider.h"
 
 CObject::CObject()
-	: m_vPos{}, m_vScale{}
+	: m_vPos{}
+	, m_vScale{}
+	, m_pCollider(nullptr)
 {
 }
 
 CObject::~CObject()
 {
+	// 컴포넌트 가지고 있었으면 해제해주기
+	if (m_pCollider != nullptr)
+		delete m_pCollider;
 }
+
+void CObject::CreateCollider()
+{
+	m_pCollider = new CCollider;
+	m_pCollider->SetOwner(this); // 쌍방 연결
+}
+
+void CObject::FinalUpdate()
+{
+	if (m_pCollider != nullptr)
+		m_pCollider->FinalUpdate();
+}
+
+void CObject::Render(HDC hdc)
+{
+	Rectangle(hdc, (int)(m_vPos.x - m_vScale.x / 2.f), (int)(m_vPos.y - m_vScale.y / 2.f),
+				   (int)(m_vPos.x + m_vScale.x / 2.f), (int)(m_vPos.y + m_vScale.y / 2.f));
+
+	// 콜라이더가 있는 각 객체의 Render 마무리 부분에 넣어준다
+	ComponetRender(hdc);
+}
+
+void CObject::ComponetRender(HDC hdc)
+{
+	// 충돌체가 있는 경우, 오버라이딩된 오브젝트의 Render() 부분에서 메서드를 호출
+	if (m_pCollider != nullptr)
+	{
+		m_pCollider->Render(hdc);
+	}
+}
+

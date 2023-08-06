@@ -3,6 +3,7 @@
 class CTimeMgr
 {
 	SINGLE(CTimeMgr);
+
 private:
 	LARGE_INTEGER	m_liCurCount;
 	LARGE_INTEGER	m_liPrevCount;
@@ -13,15 +14,16 @@ private:
 	UINT			m_iCallCount;
 	UINT			m_iFPS;
 
+private:
+	CTimeMgr();
+	~CTimeMgr();
+
 public:
 	void Init();
 	void Update();
+	void Render();
 
 public:
 	double GetDT() { return m_dDT; }
 	float GetfDT() { return (float)m_dDT; }
-
-private:
-	CTimeMgr();
-	~CTimeMgr();
 };

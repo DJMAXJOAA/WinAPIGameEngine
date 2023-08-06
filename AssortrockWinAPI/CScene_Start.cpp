@@ -1,14 +1,17 @@
 #include "pch.h"
 #include "CScene_Start.h"
 
+#include "CCore.h"
+#include "CPathMgr.h"
+
 #include "CObject.h"
 #include "CPlayer.h"
 #include "CMonster.h"
-
-#include "CCore.h"
+#include "CTexture.h"
 
 void CScene_Start::Enter()
 {
+
 	// Player Ãß°¡
 	CObject* pObj = new CPlayer;
 	pObj->SetPos(Vec2(320.f, 384.f));

@@ -9,7 +9,7 @@ CMonster::CMonster()
 	, m_fMaxDistance(50.f)
 	, m_iDir(1)
 {
-
+	CreateCollider();
 }
 
 CMonster::~CMonster()
@@ -30,8 +30,6 @@ void CMonster::Update()
 		m_iDir *= -1;
 		vCurPos.x += fDist * m_iDir;
 	}
-
-
 
 	SetPos(vCurPos);
 }

@@ -8,7 +8,11 @@ private:
 	vector<CObject*> m_arrObj[(UINT)GROUP_TYPE::END];
 	wstring m_strName;
 
-protected:
+public:
+	CScene();
+	virtual ~CScene();
+
+public:
 	void AddObject(CObject* pObj, GROUP_TYPE eType) { m_arrObj[(UINT)eType].push_back(pObj); }
 
 public:
@@ -21,10 +25,7 @@ public:
 
 public:
 	void Update();
+	void FinalUpdate(); // 마무리 작업(모두 업데이트 끝나고, 확정 후 render)
 	void Render(HDC hdc);
-
-public:
-	CScene();
-	virtual ~CScene();
 };
 
