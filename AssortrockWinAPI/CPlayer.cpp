@@ -19,9 +19,10 @@ CPlayer::CPlayer()
 	// Texture 로딩
 	m_pTex = CResMgr::GetInstance()->LoadTexture(L"PlayerTex", L"texture\\Player.bmp");
 
+	// 콜라이더 얻기 + 콜라이더 설정
 	CreateCollider();
-	
-	GetCollider()->SetScale(Vec2(100.f, 100.f));
+	GetCollider()->SetOffsetPos(Vec2(0.f, 10.f));
+	GetCollider()->SetScale(Vec2(30.f, 50.f));
 }
 
 CPlayer::~CPlayer()

@@ -2,6 +2,7 @@
 
 class CObject;
 
+// 현재 25~26강까지 처리했음(잠깐스탑) 
 class CCollider
 {
 private:

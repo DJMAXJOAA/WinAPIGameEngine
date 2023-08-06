@@ -3,13 +3,17 @@
 
 #include "CTimeMgr.h"
 
+#include "CCollider.h"
+
 CMonster::CMonster()
 	: m_vCenterPos(0.f, 0.f)
 	, m_fSpeed(100.f)
 	, m_fMaxDistance(50.f)
 	, m_iDir(1)
 {
+	// 콜라이더 얻기 + 콜라이더 설정
 	CreateCollider();
+	GetCollider()->SetScale(Vec2(40.f, 40.f));
 }
 
 CMonster::~CMonster()
@@ -32,4 +36,7 @@ void CMonster::Update()
 	}
 
 	SetPos(vCurPos);
+
+	// 업데이트 끝나고, 정리(콜라이더 처리 등)
+	FinalUpdate();
 }
