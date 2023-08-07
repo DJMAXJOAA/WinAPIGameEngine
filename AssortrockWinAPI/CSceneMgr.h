@@ -13,13 +13,19 @@ private:
 private:
 	CSceneMgr();
 	~CSceneMgr();
+
+public:
+	CScene* GetCurScene() { return m_pCurScene; }
 	
 public:
 	void Init();
 	void Update();
 	void Render(HDC hdc);
 
-public:
-	CScene* GetcurScene() { return m_pCurScene; }
+private:
+	// 전역 함수로 호출 -> 이벤트 매니저에 등록 -> 이벤트 처리 -> 그다음 씬 변경
+	void ChangeScene(SCENE_TYPE _eNext);
+
+	friend class CEventMgr;
 };
 

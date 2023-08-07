@@ -15,11 +15,14 @@ private:
 	Vec2	 m_vScale;		// 충돌체의 크기
 
 	UINT	 m_iID;			// 멤버의 고유 ID값 (겹치면 안됨)
+	UINT	 m_iCol;
 
 public:
 	CCollider();
 	CCollider(const CCollider& _origin); // 깊은 복사를 통해 생성되는 복사 생성자
 	~CCollider();
+
+	CCollider& operator = (CCollider& _origin) = delete;
 
 	friend class CObject;
 
@@ -35,6 +38,8 @@ public:
 
 	UINT GetID() { return m_iID; }
 
+	CObject* GetObj() { return m_pOwner; }
+
 public:
 	void FinalUpdate();
 	void Render(HDC hdc);	// 테스트 할땐 켜놨다가, 배포때 끄기
@@ -43,7 +48,4 @@ public:
 	void OnCollision(CCollider* _pOther);		// 충돌 중일때 호출
 	void OnCollisionEnter(CCollider* _pOther);	// 충돌 진입했을때 호출
 	void OnCollisionExit(CCollider* _pOther);	// 충돌 진입했을때 호출
-	
-
-	CCollider& operator = (CCollider& _origin) = delete;
 };

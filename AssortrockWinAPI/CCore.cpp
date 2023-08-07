@@ -6,6 +6,7 @@
 #include "CSceneMgr.h"
 #include "CPathMgr.h"
 #include "CCollisionMgr.h"
+#include "CEventMgr.h"
 
 #include "CObject.h"
 
@@ -79,24 +80,26 @@ int CCore::Init(HWND hWnd, POINT ptResolution)
 
 void CCore::Progress()
 {
+	// 매니저 업데이트================================================
 	CTimeMgr::GetInstance()->Update();
 	CKeyMgr::GetInstance()->Update();
+
+	// 씬 업데이트====================================================
 	CSceneMgr::GetInstance()->Update();
 	CCollisionMgr::GetInstance()->Update();
 
-	//============
-	// 렌더링 과정
-	//============
+	// 렌더링 과정====================================================
+	Rectangle(m_memDC, -1, -1, m_ptResolution.x + 1, m_ptResolution.y + 1); // 화면 클리어
 
-	// 화면 클리어
-	Rectangle(m_memDC, -1, -1, m_ptResolution.x + 1, m_ptResolution.y + 1);
-
-	// 화면 그리기
-	CSceneMgr::GetInstance()->Render(m_memDC);
+	CSceneMgr::GetInstance()->Render(m_memDC); // 화면 그리기
 
 	// 두번째 버퍼에서 첫번째 버퍼(실제로 표시되는 화면)에 복사->붙여넣기
 	BitBlt(m_hDC, 0, 0, m_ptResolution.x, m_ptResolution.y, m_memDC, 0, 0, SRCCOPY);
 
-	/*CTimeMgr::GetInstance()->Render();*/
+	CTimeMgr::GetInstance()->Render();
+
+	// 이벤트 지연 처리================================================
+	// (렌더링까지 모두 마치고 다음프레임 넘어가기 전에 실행)=============
+	CEventMgr::GetInstance()->Update();
 }
 

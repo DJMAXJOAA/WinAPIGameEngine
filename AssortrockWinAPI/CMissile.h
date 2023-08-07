@@ -1,5 +1,8 @@
 #pragma once
 #include "CObject.h"
+
+class CCollider;
+
 class CMissile :
     public CObject
 {
@@ -18,5 +21,8 @@ public:
 public:
     virtual void Update();
     virtual void Render(HDC hdc);
+
+public:
+    virtual void OnCollisionEnter(CCollider* _pOther);
 };
 

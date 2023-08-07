@@ -64,7 +64,7 @@ void CCollisionMgr::CheckGroup(GROUP_TYPE _eLeft, GROUP_TYPE _eRight)
 void CCollisionMgr::CollisionGroupUpdate(GROUP_TYPE _eLeft, GROUP_TYPE _eRight)
 {
 	// Update에서 비교하고, 특정 그룹끼리만 충돌을 비교한다
-	CScene* pCurScene = CSceneMgr::GetInstance()->GetcurScene();
+	CScene* pCurScene = CSceneMgr::GetInstance()->GetCurScene();
 	
 	// 레퍼런스 값 주의(얕은 복사, 깊은 복사)
 	const vector<CObject*>& vecLeft = pCurScene->GetGroupObject(_eLeft);
@@ -92,7 +92,7 @@ void CCollisionMgr::CollisionGroupUpdate(GROUP_TYPE _eLeft, GROUP_TYPE _eRight)
 
 			// 공용체의 공유 속성을 활용해서 고유의 새로운 키값 만들기
 			// 두 충돌체 조합 아이디
-			COLLIDER_ID ID;
+			COLLIDER_ID ID{};
 			ID.iLeft_id = pLeftCol->GetID();
 			ID.iRight_id = pRightCol->GetID();
 			iter = m_mapColInfo.find(ID.ID);
@@ -107,18 +107,32 @@ void CCollisionMgr::CollisionGroupUpdate(GROUP_TYPE _eLeft, GROUP_TYPE _eRight)
 			// 실제로 충돌 비교하는 부분 -> 따로 함수로 비교
 			if (IsCollision(pLeftCol, pRightCol))
 			{
-				if (iter->second) 
+				if (iter->second)
 				{
 					// 전 프레임에도 충돌중이였음(Stay)
+
+					if (vecLeft[i]->IsDead() || vecRight[j]->IsDead())
+					{
+						// 근데 둘중 하나 이상이 없어질 예정임 -> 그러면 충돌 벗어난 처리
+						pLeftCol->OnCollisionExit(pRightCol);
+						pRightCol->OnCollisionExit(pLeftCol);
+						iter->second = false;
+					}
+
 					pLeftCol->OnCollision(pRightCol);
 					pRightCol->OnCollision(pLeftCol);
 				}
 				else
 				{
 					// 처음 충돌하는 상황(Enter)
-					pLeftCol->OnCollisionEnter(pRightCol);
-					pRightCol->OnCollisionEnter(pLeftCol);
-					iter->second = true;
+
+					if (!vecLeft[i]->IsDead() && !vecRight[j]->IsDead())
+					{
+						// 둘다 살아있어야 조건 성립, 하나라도 죽으면 걍 충돌 없는 처리
+						pLeftCol->OnCollisionEnter(pRightCol);
+						pRightCol->OnCollisionEnter(pLeftCol);
+						iter->second = true;
+					}
 				}
 			}
 			else

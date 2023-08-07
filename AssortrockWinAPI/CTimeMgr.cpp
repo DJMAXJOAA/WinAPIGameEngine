@@ -21,6 +21,11 @@ void CTimeMgr::Update()
 
 	// 이전카운트 값을 현재 카운트값으로 갱신(다음 계산 위해)
 	m_liPrevCount = m_liCurCount;
+
+#ifdef _DEBUG
+	if (m_dDT > (1./60.))
+		m_dDT = (1./60.);
+#endif
 }
 
 void CTimeMgr::Render()
@@ -47,6 +52,7 @@ CTimeMgr::CTimeMgr()
 	, m_dDT(0.)
 	, m_dAcc(0.)
 	, m_iCallCount(0)
+	, m_iFPS(0)
 {
 }
 

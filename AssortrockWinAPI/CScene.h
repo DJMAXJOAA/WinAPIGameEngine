@@ -14,6 +14,8 @@ public:
 
 public:
 	void AddObject(CObject* pObj, GROUP_TYPE eType) { m_arrObj[(UINT)eType].push_back(pObj); }
+	void DeleteGroup(GROUP_TYPE _eTarget);
+	void DeleteAll();
 
 public:
 	const wstring& GetName() { return m_strName; }
@@ -27,8 +29,8 @@ public:
 	virtual void Exit() = 0; // Scene의 탈출
 
 public:
-	void Update();
-	void FinalUpdate(); // 마무리 작업(모두 업데이트 끝나고, 확정 후 render)
-	void Render(HDC hdc);
+	virtual void Update();
+	virtual void FinalUpdate(); // 마무리 작업(모두 업데이트 끝나고, 확정 후 render)
+	virtual void Render(HDC hdc);
 };
 

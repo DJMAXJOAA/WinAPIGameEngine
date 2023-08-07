@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CPlayer.h"
+#include "func.h"
 
 #include "CTimeMgr.h"
 #include "CKeyMgr.h"
@@ -37,13 +38,12 @@ void CPlayer::CreateMissile()
 
 	// Missile Object
 	CMissile* pMissile = new CMissile;
+	pMissile->SetName(L"Missile_Player");
 	pMissile->SetPos(vMissilePos);
 	pMissile->SetScale(Vec2(25.f, 25.f));
 	pMissile->SetDir(Vec2(-0.f, -1.f)); // 공격 방향
 
-	// 씬 매니저에서 현재 씬을 불러오기
-	CScene* pCurScene = CSceneMgr::GetInstance()->GetcurScene();
-	pCurScene->AddObject(pMissile, GROUP_TYPE::DEFAULT);
+	CreateObj(pMissile, GROUP_TYPE::MISSILE_PLAYER);
 }
 
 void CPlayer::Render(HDC hdc)
@@ -95,8 +95,5 @@ void CPlayer::Update()
 	}
 
 	SetPos(vPos);
-
-	// 업데이트 끝나고, 정리(콜라이더 처리 등)
-	FinalUpdate();
 }
 

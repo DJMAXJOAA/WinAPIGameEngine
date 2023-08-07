@@ -71,6 +71,12 @@
     <Filter Include="Engine\03. Manager\CollisionManager">
       <UniqueIdentifier>{ee4f6739-1dfc-438c-9640-49a4d93857d5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Manager\EventManager">
+      <UniqueIdentifier>{11253cbb-03dc-4b84-9dca-c7fc2886a508}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\05. Scene\Scene_Tool">
+      <UniqueIdentifier>{ecf01e0a-307f-4199-9f2c-7884e6501e72}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssortrockWinAPI.h">
@@ -146,6 +152,15 @@
     <ClInclude Include="CCollisionMgr.h">
       <Filter>Engine\03. Manager\CollisionManager</Filter>
     </ClInclude>
+    <ClInclude Include="CEventMgr.h">
+      <Filter>Engine\03. Manager\EventManager</Filter>
+    </ClInclude>
+    <ClInclude Include="func.h">
+      <Filter>Engine\01. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CScene_Tool.h">
+      <Filter>Engine\05. Scene\Scene_Tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp">
@@ -202,6 +217,15 @@
     </ClCompile>
     <ClCompile Include="CCollisionMgr.cpp">
       <Filter>Engine\03. Manager\CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CEventMgr.cpp">
+      <Filter>Engine\03. Manager\EventManager</Filter>
+    </ClCompile>
+    <ClCompile Include="func.cpp">
+      <Filter>Engine\01. Header</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene_Tool.cpp">
+      <Filter>Engine\05. Scene\Scene_Tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
