@@ -68,6 +68,9 @@
     <Filter Include="Engine\08. Module">
       <UniqueIdentifier>{79eab0b6-d006-42b0-a0d6-a738620eb52a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Manager\CollisionManager">
+      <UniqueIdentifier>{ee4f6739-1dfc-438c-9640-49a4d93857d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssortrockWinAPI.h">
@@ -140,6 +143,9 @@
     <ClInclude Include="SelectGDI.h">
       <Filter>Engine\08. Module</Filter>
     </ClInclude>
+    <ClInclude Include="CCollisionMgr.h">
+      <Filter>Engine\03. Manager\CollisionManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp">
@@ -193,6 +199,9 @@
     </ClCompile>
     <ClCompile Include="SelectGDI.cpp">
       <Filter>Engine\08. Module</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollisionMgr.cpp">
+      <Filter>Engine\03. Manager\CollisionManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,7 @@
 #include "CKeyMgr.h"
 #include "CSceneMgr.h"
 #include "CPathMgr.h"
+#include "CCollisionMgr.h"
 
 #include "CObject.h"
 
@@ -81,6 +82,7 @@ void CCore::Progress()
 	CTimeMgr::GetInstance()->Update();
 	CKeyMgr::GetInstance()->Update();
 	CSceneMgr::GetInstance()->Update();
+	CCollisionMgr::GetInstance()->Update();
 
 	//============
 	// 렌더링 과정
