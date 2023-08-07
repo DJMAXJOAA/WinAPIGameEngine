@@ -14,8 +14,19 @@ CObject::CObject()
 {
 }
 
-CObject::~CObject()
+CObject::CObject(const CObject& _origin)
+	: m_strName(_origin.m_strName)
+	, m_vPos(_origin.m_vPos)
+	, m_vScale(_origin.m_vScale)
+	, m_pCollider(nullptr) // 새로 콜라이더 생성
+	, m_bAlive(true)
 {
+	m_pCollider = new CCollider(*_origin.m_pCollider); // 콜라이더 복사 생성
+	m_pCollider->m_pOwner = this;
+}
+
+CObject::~CObject()
+{	  m_bAlive;	
 	// 컴포넌트 가지고 있었으면 해제해주기
 	if (m_pCollider != nullptr)
 		delete m_pCollider;

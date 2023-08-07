@@ -30,6 +30,18 @@ void CScene_Start::Enter()
 	pObj->SetScale(Vec2(100.f, 100.f));
 	AddObject(pObj, GROUP_TYPE::PLAYER);
 
+	// Player의 복사 생성
+	{
+		CObject* pOtherPlayer = pObj->Clone();
+		pOtherPlayer->SetPos(Vec2(420.f, 384.f));
+		AddObject(pOtherPlayer, GROUP_TYPE::PLAYER);
+	}
+	{
+		CObject* pOtherPlayer = pObj->Clone();
+		pOtherPlayer->SetPos(Vec2(370.f, 354.f));
+		AddObject(pOtherPlayer, GROUP_TYPE::PLAYER);
+	}
+
 	// Monster 추가
 	int iMonCount = 16;
 	Vec2 vResolution = CCore::GetInstance()->GetResolution();

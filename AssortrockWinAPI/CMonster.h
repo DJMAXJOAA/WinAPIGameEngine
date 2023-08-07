@@ -28,5 +28,7 @@ public:
 
 public:
     virtual void Update();
+
+    CLONE(CMonster);
 };
 

@@ -17,7 +17,9 @@ public:
     virtual void Render(HDC hdc);
     virtual void Update();
 
+    CLONE(CPlayer);
+
 private:
-    void CreateMissile();
+    void CreateMissile();   // 酒公唱 积己 给窍霸 private
 };
 

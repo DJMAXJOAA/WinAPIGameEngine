@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "CPlayer.h"
-#include "func.h"
 
 #include "CTimeMgr.h"
 #include "CKeyMgr.h"
@@ -26,6 +25,13 @@ CPlayer::CPlayer()
 	GetCollider()->SetScale(Vec2(30.f, 50.f));
 }
 
+// 어차피 복사 요소가 텍스처 -> 얕은 복사해와야 하는 요소니까, 따로 복사생성자를 신경쓸 필요가 없음
+//CPlayer::CPlayer(const CPlayer& _origin)
+//	: CObject(_origin)
+//	, m_pTex(_origin.m_pTex) 
+//{
+//}
+
 CPlayer::~CPlayer()
 {
 
@@ -43,6 +49,8 @@ void CPlayer::CreateMissile()
 	pMissile->SetScale(Vec2(25.f, 25.f));
 	pMissile->SetDir(Vec2(-0.f, -1.f)); // 공격 방향
 
+	// 바로 만들어지지 않고, 이벤트 매니저에게 이벤트를 추가시킴
+	// 다음 프레임에 만들어질거임
 	CreateObj(pMissile, GROUP_TYPE::MISSILE_PLAYER);
 }
 

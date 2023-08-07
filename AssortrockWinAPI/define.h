@@ -11,6 +11,8 @@ return &mgr;\
 #define fDT CTimeMgr::GetInstance()->GetfDT()
 #define DT CTimeMgr::GetInstance()->GetDT()
 
+#define CLONE(type) type* Clone() {return new type(*this);}
+
 #define KEY_CHECK(key, state) CKeyMgr::GetInstance()->GetKeyState(key) == state
 #define KEY_HOLD(key) KEY_CHECK(key, KEY_STATE::HOLD)
 #define KEY_TAP(key) KEY_CHECK(key, KEY_STATE::TAP)	

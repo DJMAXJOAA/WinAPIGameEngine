@@ -17,6 +17,7 @@ private:
 
 public:
 	CObject();
+	CObject(const CObject& _origin); // 복사 생성
 	virtual ~CObject();
 
 	friend class CEventMgr;
@@ -48,4 +49,6 @@ public:
 	virtual void Render(HDC hdc);
 
 	void ComponetRender(HDC hdc);
+
+	virtual CObject* Clone() = 0;	// 복제
 };

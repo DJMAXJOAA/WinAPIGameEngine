@@ -19,10 +19,12 @@ public:
     void SetDir(Vec2 _vDir) { m_vDir = _vDir; m_vDir.Normalize(); }
 
 public:
+    virtual void OnCollisionEnter(CCollider* _pOther);
+
+public:
     virtual void Update();
     virtual void Render(HDC hdc);
 
-public:
-    virtual void OnCollisionEnter(CCollider* _pOther);
+    CLONE(CMissile);
 };
 
