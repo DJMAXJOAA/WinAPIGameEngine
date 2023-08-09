@@ -7,7 +7,7 @@ private:
 
 public:
 	CRes();
-	~CRes();
+	virtual ~CRes();	// 오브젝트처럼 주의해야댐
 
 public:
 	void SetKey(const wstring& _strKey) { m_strKey = _strKey; }

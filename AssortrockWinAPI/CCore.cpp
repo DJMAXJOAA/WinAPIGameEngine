@@ -7,6 +7,7 @@
 #include "CPathMgr.h"
 #include "CCollisionMgr.h"
 #include "CEventMgr.h"
+#include "CCamera.h"
 
 #include "CObject.h"
 
@@ -83,6 +84,7 @@ void CCore::Progress()
 	// 매니저 업데이트================================================
 	CTimeMgr::GetInstance()->Update();
 	CKeyMgr::GetInstance()->Update();
+	CCamera::GetInstance()->Update();
 
 	// 씬 업데이트====================================================
 	CSceneMgr::GetInstance()->Update();

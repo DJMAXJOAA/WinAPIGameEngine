@@ -13,26 +13,27 @@
 
 #include "CCollider.h"
 #include "CAnimator.h"
+#include "CAnimation.h"
 
 CPlayer::CPlayer()
-	: m_pTex(nullptr)
 {
 	// 콜라이더 얻기 + 콜라이더 설정
 	CreateCollider();
-	GetCollider()->SetOffsetPos(Vec2(0.f, 10.f));
-	GetCollider()->SetScale(Vec2(30.f, 50.f));
+	GetCollider()->SetOffsetPos(Vec2(0.f, 0.f));
+	GetCollider()->SetScale(Vec2(40.f, 100.f));
 
-	m_pTex = CResMgr::GetInstance()->LoadTexture(L"PlayerTex", L"texture\\asdf2.bmp");
+	// 텍스쳐 로딩 (애니메이션 설정)
+	CTexture* pTex = CResMgr::GetInstance()->LoadTexture(L"PlayerTex", L"texture\\asdf2.bmp");
 	CreateAnimator();
-	GetAnimator()->CreateAnimation(L"Player", m_pTex, Vec2(0.f, 0.f), Vec2(170.f, 179.f), Vec2(171.f, 0.f), 5); // 854x179, 170x179 5동작 + 가로1칸간격
+	GetAnimator()->CreateAnimation(L"Player", pTex, Vec2(0.f, 0.f), Vec2(170.f, 179.f), Vec2(171.f, 0.f), 0.15f, 5); // 854x179, 170x179 5동작 + 가로1칸간격
+	GetAnimator()->Play(L"Player", true);
+	
+	CAnimation* pAnim = GetAnimator()->FindAnimation(L"Player");
+	for (int i = 0; i < pAnim->GetMaxFrame(); i++)
+	{
+		pAnim->GetFrame(i).vOffset = Vec2(-10.f, -20.f);
+	}
 }
-
-// 어차피 복사 요소가 텍스처 -> 얕은 복사해와야 하는 요소니까, 따로 복사생성자를 신경쓸 필요가 없음
-//CPlayer::CPlayer(const CPlayer& _origin)
-//	: CObject(_origin)
-//	, m_pTex(_origin.m_pTex) 
-//{
-//}
 
 CPlayer::~CPlayer()
 {
@@ -58,22 +59,8 @@ void CPlayer::CreateMissile()
 
 void CPlayer::Render(HDC hdc)
 {
-	// pTex의 반환값은 uint지만, 화면 밖으로 빠져나갈 수 있어서 음수 값도 가능한 int로 받아야 한다
-	int iWidth = m_pTex->Width();
-	int iHeight = m_pTex->Height();
-
-	Vec2 vPos = GetPos();
-
-	TransparentBlt(hdc
-		, int(vPos.x - (float)(iWidth / 2))
-		, int(vPos.y - (float)(iHeight / 2))
-		, iWidth, iHeight
-		, m_pTex->GetDC()
-		, 0, 0 
-		, iWidth, iHeight
-		, RGB(255, 0, 255));
-
-	// 충돌체 렌더링 함수
+	// 컴포넌트 렌더링 함수
+	// 콜라이더 + 애니메이션
 	ComponetRender(hdc);
 }
 
@@ -105,5 +92,6 @@ void CPlayer::Update()
 	}
 
 	SetPos(vPos);
-}
 
+	GetAnimator()->Update();
+}

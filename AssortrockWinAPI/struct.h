@@ -12,7 +12,8 @@ public:
 		float fLen = Length();
 
 		// 0으로 나누거나, 곱하는 경우를 없애야 한다(예외처리) -> 연산이 복잡해진다
-		assert(fLen != 0.f);
+		if (fLen == 0.f)
+			fLen += 0.001f;
 
 		x /= fLen;
 		y /= fLen;
@@ -27,9 +28,13 @@ public:
 	}
 
 	Vec2 operator + (Vec2 _vOther) { return Vec2(x + _vOther.x, y + _vOther.y); }
+	void operator += (Vec2 _vOther) { x += _vOther.x; y += _vOther.y; }
 	Vec2 operator - (Vec2 _vOther) { return Vec2(x - _vOther.x, y - _vOther.y); }
 	Vec2 operator * (Vec2 _vOther) { return Vec2(x * _vOther.x, y * _vOther.y); }
+	Vec2 operator * (int _i) { return Vec2(x * (float)_i, y * (float)_i); }
+	Vec2 operator * (float _f) { return Vec2(x * _f, y * _f); }
 	Vec2 operator / (Vec2 _vOther) { assert(!(0.f == _vOther.x || 0.f == _vOther.y)); return Vec2(x / _vOther.x, y / _vOther.y); } // 0이 아니여야댐
+	Vec2 operator / (float _f) { assert(!(0.f == _f)); return Vec2(x / _f, y / _f); }
 
 public:
 	Vec2() : x(0.f), y(0.f) {}

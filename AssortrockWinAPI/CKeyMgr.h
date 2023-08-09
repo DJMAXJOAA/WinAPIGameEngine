@@ -26,12 +26,16 @@ enum class KEY
 	C,
 	V,
 	B,
+
 	ALT,
 	LSHIFT,
 	SPACE,
 	CTRL,
 	ENTER,
 	ESC,
+
+	LBTN,
+	RBTN,
 
 	LAST // ³¡
 };
@@ -56,15 +60,18 @@ class CKeyMgr
 
 private:
 	vector<tKeyInfo> m_vecKey;
+	Vec2			 m_vCurMousePos;
 
 private:
 	CKeyMgr();
 	~CKeyMgr();
 
 public:
+	KEY_STATE GetKeyState(KEY _eKey) { return m_vecKey[(int)_eKey].eState; }
+	Vec2 GetMousePos() { return m_vCurMousePos; }
+
+public:
 	void Init();
 	void Update();
 
-public:
-	KEY_STATE GetKeyState(KEY _eKey) { return m_vecKey[(int)_eKey].eState; }
 };

@@ -27,6 +27,7 @@ void CMonster::OnCollisionEnter(CCollider* _pOther)
 
 	if (pOtherObj->GetName() == L"Missile_Player")
 	{
+		CCamera::GetInstance()->SetVibrateCamera(30.f, 1, 0.02f);
 		m_iHP -= 1;
 		if(m_iHP < 0)
  			DeleteObj(this);

@@ -29,15 +29,6 @@
     <Filter Include="Engine\04. Object\Player">
       <UniqueIdentifier>{4ac38a31-89f0-4b11-ab28-29ffed116a3e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\03. Manager\KeyManger">
-      <UniqueIdentifier>{82fb9553-9758-484a-a449-01b910dfb9ee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\03. Manager\SceneManger">
-      <UniqueIdentifier>{c231642b-7ef7-4ef9-9f55-af9237f94dc5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\03. Manager\TimeManger">
-      <UniqueIdentifier>{a706651e-7465-4848-9113-bc1a5763c652}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\05. Scene\Scene_Start">
       <UniqueIdentifier>{c924dcf1-afc6-40c6-ab9e-6c5298c7052f}</UniqueIdentifier>
     </Filter>
@@ -56,23 +47,11 @@
     <Filter Include="Engine\06. Resource\Texture">
       <UniqueIdentifier>{2ae9b7d1-68ea-4e8d-b03e-270fdb4ab18c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\03. Manager\PathManger">
-      <UniqueIdentifier>{a8ffc337-22de-47a9-9cb0-082a0985ac39}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\03. Manager\ResourceManger">
-      <UniqueIdentifier>{8048fd14-8c5b-4e73-9f26-5aea43c1d7a4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\07. Component">
       <UniqueIdentifier>{d961f8b1-34f0-477e-921f-f868f5477b1d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\08. Module">
       <UniqueIdentifier>{79eab0b6-d006-42b0-a0d6-a738620eb52a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\03. Manager\CollisionManager">
-      <UniqueIdentifier>{ee4f6739-1dfc-438c-9640-49a4d93857d5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\03. Manager\EventManager">
-      <UniqueIdentifier>{11253cbb-03dc-4b84-9dca-c7fc2886a508}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\05. Scene\Scene_Tool">
       <UniqueIdentifier>{ecf01e0a-307f-4199-9f2c-7884e6501e72}</UniqueIdentifier>
@@ -85,6 +64,30 @@
     </Filter>
     <Filter Include="Engine\07. Component\Animator\Animation">
       <UniqueIdentifier>{6a8929ad-daac-49d5-8f6b-3508dfa459c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Manager\Collision">
+      <UniqueIdentifier>{ee4f6739-1dfc-438c-9640-49a4d93857d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Manager\Event">
+      <UniqueIdentifier>{11253cbb-03dc-4b84-9dca-c7fc2886a508}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Manager\Key">
+      <UniqueIdentifier>{82fb9553-9758-484a-a449-01b910dfb9ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Manager\Path">
+      <UniqueIdentifier>{a8ffc337-22de-47a9-9cb0-082a0985ac39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Manager\Resource">
+      <UniqueIdentifier>{8048fd14-8c5b-4e73-9f26-5aea43c1d7a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Manager\Scene">
+      <UniqueIdentifier>{c231642b-7ef7-4ef9-9f55-af9237f94dc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Manager\Time">
+      <UniqueIdentifier>{a706651e-7465-4848-9113-bc1a5763c652}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Manager\Camera">
+      <UniqueIdentifier>{8e0712bd-19f0-4804-87ce-a23372f247e2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -107,7 +110,7 @@
       <Filter>Engine\01. Header</Filter>
     </ClInclude>
     <ClInclude Include="CKeyMgr.h">
-      <Filter>Engine\03. Manager\KeyManger</Filter>
+      <Filter>Engine\03. Manager\Key</Filter>
     </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="CObject.h">
@@ -117,13 +120,13 @@
       <Filter>Engine\01. Header</Filter>
     </ClInclude>
     <ClInclude Include="CTimeMgr.h">
-      <Filter>Engine\03. Manager\TimeManger</Filter>
+      <Filter>Engine\03. Manager\Time</Filter>
     </ClInclude>
     <ClInclude Include="CScene.h">
       <Filter>Engine\05. Scene</Filter>
     </ClInclude>
     <ClInclude Include="CSceneMgr.h">
-      <Filter>Engine\03. Manager\SceneManger</Filter>
+      <Filter>Engine\03. Manager\Scene</Filter>
     </ClInclude>
     <ClInclude Include="CScene_Start.h">
       <Filter>Engine\05. Scene\Scene_Start</Filter>
@@ -147,19 +150,19 @@
       <Filter>Engine\06. Resource\Texture</Filter>
     </ClInclude>
     <ClInclude Include="CPathMgr.h">
-      <Filter>Engine\03. Manager\PathManger</Filter>
+      <Filter>Engine\03. Manager\Path</Filter>
     </ClInclude>
     <ClInclude Include="CResMgr.h">
-      <Filter>Engine\03. Manager\ResourceManger</Filter>
+      <Filter>Engine\03. Manager\Resource</Filter>
     </ClInclude>
     <ClInclude Include="SelectGDI.h">
       <Filter>Engine\08. Module</Filter>
     </ClInclude>
     <ClInclude Include="CCollisionMgr.h">
-      <Filter>Engine\03. Manager\CollisionManager</Filter>
+      <Filter>Engine\03. Manager\Collision</Filter>
     </ClInclude>
     <ClInclude Include="CEventMgr.h">
-      <Filter>Engine\03. Manager\EventManager</Filter>
+      <Filter>Engine\03. Manager\Event</Filter>
     </ClInclude>
     <ClInclude Include="func.h">
       <Filter>Engine\01. Header</Filter>
@@ -176,6 +179,9 @@
     <ClInclude Include="CAnimation.h">
       <Filter>Engine\07. Component\Animator\Animation</Filter>
     </ClInclude>
+    <ClInclude Include="CCamera.h">
+      <Filter>Engine\03. Manager\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp">
@@ -186,16 +192,16 @@
       <Filter>Engine\04. Object</Filter>
     </ClCompile>
     <ClCompile Include="CKeyMgr.cpp">
-      <Filter>Engine\03. Manager\KeyManger</Filter>
+      <Filter>Engine\03. Manager\Key</Filter>
     </ClCompile>
     <ClCompile Include="CTimeMgr.cpp">
-      <Filter>Engine\03. Manager\TimeManger</Filter>
+      <Filter>Engine\03. Manager\Time</Filter>
     </ClCompile>
     <ClCompile Include="CScene.cpp">
       <Filter>Engine\05. Scene</Filter>
     </ClCompile>
     <ClCompile Include="CSceneMgr.cpp">
-      <Filter>Engine\03. Manager\SceneManger</Filter>
+      <Filter>Engine\03. Manager\Scene</Filter>
     </ClCompile>
     <ClCompile Include="CScene_Start.cpp">
       <Filter>Engine\05. Scene\Scene_Start</Filter>
@@ -219,19 +225,19 @@
       <Filter>Engine\06. Resource\Texture</Filter>
     </ClCompile>
     <ClCompile Include="CPathMgr.cpp">
-      <Filter>Engine\03. Manager\PathManger</Filter>
+      <Filter>Engine\03. Manager\Path</Filter>
     </ClCompile>
     <ClCompile Include="CResMgr.cpp">
-      <Filter>Engine\03. Manager\ResourceManger</Filter>
+      <Filter>Engine\03. Manager\Resource</Filter>
     </ClCompile>
     <ClCompile Include="SelectGDI.cpp">
       <Filter>Engine\08. Module</Filter>
     </ClCompile>
     <ClCompile Include="CCollisionMgr.cpp">
-      <Filter>Engine\03. Manager\CollisionManager</Filter>
+      <Filter>Engine\03. Manager\Collision</Filter>
     </ClCompile>
     <ClCompile Include="CEventMgr.cpp">
-      <Filter>Engine\03. Manager\EventManager</Filter>
+      <Filter>Engine\03. Manager\Event</Filter>
     </ClCompile>
     <ClCompile Include="func.cpp">
       <Filter>Engine\01. Header</Filter>
@@ -247,6 +253,9 @@
     </ClCompile>
     <ClCompile Include="CAnimation.cpp">
       <Filter>Engine\07. Component\Animator\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="CCamera.cpp">
+      <Filter>Engine\03. Manager\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

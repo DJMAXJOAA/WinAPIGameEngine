@@ -1,5 +1,9 @@
 #pragma once
 
+// 카메라는 항상 존재하니까 CCamera.h는 오브젝트 헤더에서부터 포함시키기
+// 헤더에서 헤더참조는 별로 좋지는 않지만, 항상 사용되는 헤더파일이라서 포함
+#include "CCamera.h"
+
 class CCollider;
 class CAnimator;
 

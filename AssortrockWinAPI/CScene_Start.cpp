@@ -6,6 +6,7 @@
 #include "CCollisionMgr.h"
 #include "CKeyMgr.h"
 #include "CSceneMgr.h"
+#include "CCamera.h"
 
 #include "CObject.h"
 #include "CPlayer.h"
@@ -20,6 +21,20 @@ void CScene_Start::Update()
 	{
 		ChangeScene(SCENE_TYPE::TOOL);
 	}
+
+	// 마우스 위치 계산할때는 렌더링 좌표 기준으로 계산하니까, 오브젝트와 반대로 계산
+	if (!CCamera::GetInstance()->IsVibrating())
+	{
+		if (KEY_TAP(KEY::LBTN))
+		{
+			Vec2 vLookAt = CCamera::GetInstance()->GetRealPos(MOUSE_POS);
+			CCamera::GetInstance()->SetLookAt(vLookAt);
+		}
+		if (KEY_TAP(KEY::RBTN))
+		{
+			CCamera::GetInstance()->SetVibrateCamera(50.f, 10, 0.03f);
+		}
+	}
 }
 
 void CScene_Start::Enter()
@@ -29,18 +44,20 @@ void CScene_Start::Enter()
 	pObj->SetPos(Vec2(320.f, 384.f));
 	pObj->SetScale(Vec2(100.f, 100.f));
 	AddObject(pObj, GROUP_TYPE::PLAYER);
+	
+	/*CCamera::GetInstance()->SetTarget(pObj);*/
 
 	// Player의 복사 생성
-	{
-		CObject* pOtherPlayer = pObj->Clone();
-		pOtherPlayer->SetPos(Vec2(420.f, 384.f));
-		AddObject(pOtherPlayer, GROUP_TYPE::PLAYER);
-	}
-	{
-		CObject* pOtherPlayer = pObj->Clone();
-		pOtherPlayer->SetPos(Vec2(370.f, 354.f));
-		AddObject(pOtherPlayer, GROUP_TYPE::PLAYER);
-	}
+	//{
+	//	CObject* pOtherPlayer = pObj->Clone();
+	//	pOtherPlayer->SetPos(Vec2(420.f, 384.f));
+	//	AddObject(pOtherPlayer, GROUP_TYPE::PLAYER);
+	//}
+	//{
+	//	CObject* pOtherPlayer = pObj->Clone();
+	//	pOtherPlayer->SetPos(Vec2(370.f, 354.f));
+	//	AddObject(pOtherPlayer, GROUP_TYPE::PLAYER);
+	//}
 
 	// Monster 추가
 	int iMonCount = 16;
@@ -61,6 +78,9 @@ void CScene_Start::Enter()
 	// 충돌 처리 -> player 그룹과 monster 그룹 간의 충돌 체크
 	CCollisionMgr::GetInstance()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::MONSTER);
 	CCollisionMgr::GetInstance()->CheckGroup(GROUP_TYPE::MISSILE_PLAYER, GROUP_TYPE::MONSTER);
+
+	// 카메라 시점 지정
+	CCamera::GetInstance()->SetLookAt(vResolution / 2.f);
 }
 
 void CScene_Start::Exit()
