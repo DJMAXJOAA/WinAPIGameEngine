@@ -27,7 +27,6 @@ public:
 	friend class CObject;
 
 public:
-	void SetOwner(CObject* pObj) { m_pOwner = pObj; }
 	void SetOffsetPos(Vec2 _vPos) { m_vOffsetPos = _vPos; }
 	void SetScale(Vec2 _vScale) { m_vScale = _vScale; }
 	

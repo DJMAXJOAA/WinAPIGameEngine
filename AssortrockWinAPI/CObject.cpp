@@ -5,11 +5,13 @@
 #include "CTimeMgr.h"
 
 #include "CCollider.h"
+#include "CAnimator.h"
 
 CObject::CObject()
 	: m_vPos{}
 	, m_vScale{}
 	, m_pCollider(nullptr)
+	, m_pAnimator(nullptr)
 	, m_bAlive(true)
 {
 }
@@ -19,10 +21,19 @@ CObject::CObject(const CObject& _origin)
 	, m_vPos(_origin.m_vPos)
 	, m_vScale(_origin.m_vScale)
 	, m_pCollider(nullptr) // 새로 콜라이더 생성
+	, m_pAnimator(nullptr)
 	, m_bAlive(true)
 {
-	m_pCollider = new CCollider(*_origin.m_pCollider); // 콜라이더 복사 생성
-	m_pCollider->m_pOwner = this;
+	if(_origin.m_pCollider)
+	{
+		m_pCollider = new CCollider(*_origin.m_pCollider); // 콜라이더 복사 생성
+		m_pCollider->m_pOwner = this;
+	}
+	if (_origin.m_pAnimator)
+	{
+		m_pAnimator = new CAnimator(*_origin.m_pAnimator); // 콜라이더 복사 생성
+		m_pAnimator->m_pOwner = this;
+	}
 }
 
 CObject::~CObject()
@@ -30,12 +41,21 @@ CObject::~CObject()
 	// 컴포넌트 가지고 있었으면 해제해주기
 	if (m_pCollider != nullptr)
 		delete m_pCollider;
+
+	if (m_pAnimator != nullptr)
+		delete m_pAnimator;
 }
 
 void CObject::CreateCollider()
 {
 	m_pCollider = new CCollider;
-	m_pCollider->SetOwner(this); // 쌍방 연결
+	m_pCollider->m_pOwner = this;
+}
+
+void CObject::CreateAnimator()
+{
+	m_pAnimator = new CAnimator;
+	m_pAnimator->m_pOwner = this;
 }
 
 void CObject::FinalUpdate()
@@ -59,6 +79,10 @@ void CObject::ComponetRender(HDC hdc)
 	if (m_pCollider != nullptr)
 	{
 		m_pCollider->Render(hdc);
+	}
+	if (m_pAnimator != nullptr)
+	{
+		m_pAnimator->Render(hdc);
 	}
 }
 

@@ -12,17 +12,19 @@
 #include "CMissile.h"
 
 #include "CCollider.h"
+#include "CAnimator.h"
 
 CPlayer::CPlayer()
 	: m_pTex(nullptr)
 {
-	// Texture 로딩
-	m_pTex = CResMgr::GetInstance()->LoadTexture(L"PlayerTex", L"texture\\Player.bmp");
-
 	// 콜라이더 얻기 + 콜라이더 설정
 	CreateCollider();
 	GetCollider()->SetOffsetPos(Vec2(0.f, 10.f));
 	GetCollider()->SetScale(Vec2(30.f, 50.f));
+
+	m_pTex = CResMgr::GetInstance()->LoadTexture(L"PlayerTex", L"texture\\asdf2.bmp");
+	CreateAnimator();
+	GetAnimator()->CreateAnimation(L"Player", m_pTex, Vec2(0.f, 0.f), Vec2(170.f, 179.f), Vec2(171.f, 0.f), 5); // 854x179, 170x179 5동작 + 가로1칸간격
 }
 
 // 어차피 복사 요소가 텍스처 -> 얕은 복사해와야 하는 요소니까, 따로 복사생성자를 신경쓸 필요가 없음

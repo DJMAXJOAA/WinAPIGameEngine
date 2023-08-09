@@ -11,10 +11,7 @@ CResMgr::CResMgr()
 CResMgr::~CResMgr()
 {
     // 맵의 모든 텍스쳐 할당을 해제시켜준다
-    for (auto iter = m_mapTex.begin(); iter != m_mapTex.end(); iter++)
-    {
-        delete iter->second;
-    }
+    SafeDeleteMap(m_mapTex);
 }
 
 // 키값과, 상대경로를 인자로 넣는다
