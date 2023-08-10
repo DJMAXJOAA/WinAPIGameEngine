@@ -58,7 +58,7 @@ public:
 
 public:
 	virtual void Update() = 0; // 순수 가상 함수 -> 오브젝트들의 Update는 모두 기능이 다름 (다형성)
-	virtual void FinalUpdate() final; // final 키워드를 사용해서 오버라이딩을 막아준다
+	virtual void FinalUpdate();
 	virtual void Render(HDC hdc);
 
 	void ComponetRender(HDC hdc);

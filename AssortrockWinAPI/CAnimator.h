@@ -29,6 +29,7 @@ public:
 
 public:
 	void Update();
+	void FinalUpdate();
 	void Render(HDC hdc);
 };
 

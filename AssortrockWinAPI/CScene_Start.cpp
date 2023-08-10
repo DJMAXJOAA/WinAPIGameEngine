@@ -16,11 +16,12 @@
 void CScene_Start::Update()
 {
 	CScene::Update();	// 부모쪽 함수를 이용할 수도 있음, 오버라이딩 한 이유는 +@ 하기 위해서
-	
+
 	if (KEY_TAP(KEY::ENTER))
 	{
 		ChangeScene(SCENE_TYPE::TOOL);
 	}
+
 
 	// 마우스 위치 계산할때는 렌더링 좌표 기준으로 계산하니까, 오브젝트와 반대로 계산
 	if (!CCamera::GetInstance()->IsVibrating())

@@ -4,11 +4,12 @@
 class CScene_Tool :
     public CScene
 {
-private:
-
 public:
     CScene_Tool();
     ~CScene_Tool();
+
+public:
+    void SetTileIndex();
 
 public:
     virtual void Update();

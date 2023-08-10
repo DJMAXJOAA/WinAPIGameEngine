@@ -60,6 +60,9 @@ void CObject::CreateAnimator()
 
 void CObject::FinalUpdate()
 {
+	if (m_pAnimator != nullptr)
+		m_pCollider->FinalUpdate();
+
 	if (m_pCollider != nullptr)
 		m_pCollider->FinalUpdate();
 }

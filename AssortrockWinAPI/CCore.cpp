@@ -8,6 +8,7 @@
 #include "CCollisionMgr.h"
 #include "CEventMgr.h"
 #include "CCamera.h"
+#include "CUIMgr.h"
 
 #include "CObject.h"
 
@@ -89,6 +90,7 @@ void CCore::Progress()
 	// 씬 업데이트====================================================
 	CSceneMgr::GetInstance()->Update();
 	CCollisionMgr::GetInstance()->Update();
+	CUIMgr::GetInstance()->Update();
 
 	// 렌더링 과정====================================================
 	Rectangle(m_memDC, -1, -1, m_ptResolution.x + 1, m_ptResolution.y + 1); // 화면 클리어

@@ -89,6 +89,18 @@
     <Filter Include="Engine\03. Manager\Camera">
       <UniqueIdentifier>{8e0712bd-19f0-4804-87ce-a23372f247e2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\04. Object\Tile">
+      <UniqueIdentifier>{0f6258d7-b87a-42a1-b5ed-4943e85eb371}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04. Object\UI">
+      <UniqueIdentifier>{c90c46dd-e8e8-4254-8d65-fdd0e2010818}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Manager\UI">
+      <UniqueIdentifier>{d80e3622-bb2b-47c0-8279-f9de7ecf6794}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04. Object\UI\PanelUI">
+      <UniqueIdentifier>{94626d1c-bc49-4f45-be25-ab10399c62a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssortrockWinAPI.h">
@@ -182,6 +194,18 @@
     <ClInclude Include="CCamera.h">
       <Filter>Engine\03. Manager\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="CUI.h">
+      <Filter>Engine\04. Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CTile.h">
+      <Filter>Engine\04. Object\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIMgr.h">
+      <Filter>Engine\03. Manager\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CPanelUI.h">
+      <Filter>Engine\04. Object\UI\PanelUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp">
@@ -257,6 +281,18 @@
     <ClCompile Include="CCamera.cpp">
       <Filter>Engine\03. Manager\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="CUI.cpp">
+      <Filter>Engine\04. Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CTile.cpp">
+      <Filter>Engine\04. Object\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIMgr.cpp">
+      <Filter>Engine\03. Manager\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CPanelUI.cpp">
+      <Filter>Engine\04. Object\UI\PanelUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="AssortrockWinAPI.rc">
@@ -270,5 +306,8 @@
     <Image Include="AssortrockWinAPI.ico">
       <Filter>Default\리소스 파일</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>

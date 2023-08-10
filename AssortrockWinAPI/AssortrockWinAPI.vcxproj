@@ -149,6 +149,7 @@
     <ClInclude Include="CMissile.h" />
     <ClInclude Include="CMonster.h" />
     <ClInclude Include="CObject.h" />
+    <ClInclude Include="CPanelUI.h" />
     <ClInclude Include="CPathMgr.h" />
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CRes.h" />
@@ -159,7 +160,10 @@
     <ClInclude Include="CScene_Tool.h" />
     <ClInclude Include="CSound.h" />
     <ClInclude Include="CTexture.h" />
+    <ClInclude Include="CTile.h" />
     <ClInclude Include="CTimeMgr.h" />
+    <ClInclude Include="CUI.h" />
+    <ClInclude Include="CUIMgr.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="func.h" />
@@ -180,6 +184,7 @@
     <ClCompile Include="CMissile.cpp" />
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CObject.cpp" />
+    <ClCompile Include="CPanelUI.cpp" />
     <ClCompile Include="CPathMgr.cpp" />
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CRes.cpp" />
@@ -190,7 +195,10 @@
     <ClCompile Include="CScene_Tool.cpp" />
     <ClCompile Include="CSound.cpp" />
     <ClCompile Include="CTexture.cpp" />
+    <ClCompile Include="CTile.cpp" />
     <ClCompile Include="CTimeMgr.cpp" />
+    <ClCompile Include="CUI.cpp" />
+    <ClCompile Include="CUIMgr.cpp" />
     <ClCompile Include="func.cpp" />
     <ClCompile Include="SelectGDI.cpp" />
     <ClCompile Include="WinMain.cpp" />
@@ -202,6 +210,9 @@
   <ItemGroup>
     <Image Include="AssortrockWinAPI.ico" />
     <Image Include="small.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

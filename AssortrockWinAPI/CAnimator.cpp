@@ -62,6 +62,10 @@ void CAnimator::Update()
 	}
 }
 
+void CAnimator::FinalUpdate()
+{
+}
+
 void CAnimator::Render(HDC hdc)
 {
 	if (m_pCurAnim != nullptr)

@@ -22,6 +22,8 @@ return &mgr;\
 
 #define PI 3.1415926535f
 
+#define TILE_SIZE 51
+
 enum class GROUP_TYPE
 {
 	DEFAULT,
@@ -29,7 +31,9 @@ enum class GROUP_TYPE
 	MONSTER,
 	MISSILE_PLAYER,
 	MISSILE_MONSTER,
+	TILE,
 
+	UI = 31,
 	END = 32,
 };
 
