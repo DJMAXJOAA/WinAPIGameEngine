@@ -22,7 +22,6 @@ void CScene_Start::Update()
 		ChangeScene(SCENE_TYPE::TOOL);
 	}
 
-
 	// 마우스 위치 계산할때는 렌더링 좌표 기준으로 계산하니까, 오브젝트와 반대로 계산
 	if (!CCamera::GetInstance()->IsVibrating())
 	{

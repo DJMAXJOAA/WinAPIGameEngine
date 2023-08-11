@@ -15,7 +15,8 @@ private:
     bool                m_bLbtnDown;    // UI가 왼쪽 버튼이 눌린적 있었는지?
 
 public:
-    CUI(bool _bCamAff);     // 기본 생성자 없이 무조건 유무를 받아야 한다
+    CUI(bool _bCamAff);         // 기본 생성자 없이 무조건 유무를 받아야 한다
+    CUI(const CUI& _origin);    // UI 클론시 사용할 생성자
     virtual ~CUI();
 
     friend class CUIMgr;
@@ -23,9 +24,11 @@ public:
 
 public:
     CUI* GetParent() { return m_pParentUI; }
+    const vector<CUI*>& GetChildUI() { return m_vecChildUI; }
     Vec2 GetFinalPos() { return m_vFinalPos; }
 
     bool IsMouseOn() { return m_bMouseOn; }
+    bool IsLbtnDown() { return m_bLbtnDown; }
 
 public:
     void AddChild(CUI* _pUI) { m_vecChildUI.push_back(_pUI); _pUI->m_pParentUI = this; }

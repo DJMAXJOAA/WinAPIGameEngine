@@ -8,8 +8,9 @@
 #include "CSceneMgr.h"
 
 #include "CTile.h"
-#include "CUI.h"
 #include "CTexture.h"
+#include "CPanelUI.h"
+#include "CBtnUI.h"
 
 CScene_Tool::CScene_Tool()
 {
@@ -73,17 +74,19 @@ void CScene_Tool::Enter()
 	// UI 추가
 	Vec2 vResolution = CCore::GetInstance()->GetResolution();
 
-	CUI* pUI = new CUI(false);
-	pUI->SetScale(Vec2(500.f, 300.f));
-	pUI->SetPos(Vec2(vResolution.x - pUI->GetScale().x, 0.f));  
+	CPanelUI* pPanelUI = new CPanelUI;
+	pPanelUI->SetName(L"ParentUI");
+	pPanelUI->SetScale(Vec2(500.f, 300.f));
+	pPanelUI->SetPos(Vec2(vResolution.x - pPanelUI->GetScale().x, 0.f));
 
-	//CUI* pChildUI = new CUI;
-	//pChildUI->SetScale(Vec2(100.f, 30.f));
-	//pChildUI->SetPos(Vec2(0.f, 0.f));
-	//pUI->AddChild(pChildUI);
+	CBtnUI* pBtnUI = new CBtnUI;
+	pBtnUI->SetName(L"ChildUI");
+	pBtnUI->SetScale(Vec2(100.f, 30.f));
+	pBtnUI->SetPos(Vec2(0.f, 0.f));
+	pPanelUI->AddChild(pBtnUI);
 
 	// UI는 메인 UI하나만 들어감 -> 대신 ChildUI도 함께 들어감
-	AddObject(pUI, GROUP_TYPE::UI);
+	AddObject(pPanelUI, GROUP_TYPE::UI);
 
 	CCamera::GetInstance()->SetLookAt(vResolution / 2.f);
 }

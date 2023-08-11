@@ -12,6 +12,8 @@ using std::wstring;
 #include <map>
 using std::map;
 using std::make_pair;
+#include <list>
+using std::list;
 
 #include <math.h>
 #include <assert.h> // 오류 검출

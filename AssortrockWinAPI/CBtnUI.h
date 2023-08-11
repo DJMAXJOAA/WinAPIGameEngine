@@ -1,19 +1,18 @@
 #pragma once
-
 #include "CUI.h"
-class CPanelUI :
+
+class CBtnUI :
     public CUI
 {
 private:
-    Vec2        m_vDragStart;
 
 public:
-    CPanelUI();
-    ~CPanelUI();
+    CBtnUI();
+    ~CBtnUI();
 
 public:
     virtual void MouseOn();
     virtual void MouseLbtnDown();
     virtual void MouseLbtnUp();
-}; 
+};
 

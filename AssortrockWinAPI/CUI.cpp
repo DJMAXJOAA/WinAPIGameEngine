@@ -3,12 +3,27 @@
 
 #include "CKeyMgr.h"
 
+#include "SelectGDI.h"
+
 CUI::CUI(bool _bCamAff)
 	: m_pParentUI(nullptr)
 	, m_bCamAffected(_bCamAff)
 	, m_bMouseOn(false)
 	, m_bLbtnDown(false)
 {
+}
+
+CUI::CUI(const CUI& _origin)
+	: m_pParentUI(nullptr)
+	, m_bCamAffected(_origin.m_bCamAffected)
+	, m_bMouseOn(false)
+	, m_bLbtnDown(false)
+{
+	// 자식UI를 깊은 복사로 생성한다
+	for (size_t i = 0; i < _origin.m_vecChildUI.size(); i++)
+	{
+		AddChild(_origin.m_vecChildUI[i]->Clone());
+	}
 }
 
 CUI::~CUI()
@@ -86,11 +101,24 @@ void CUI::Render(HDC hdc)
 		vPos = CCamera::GetInstance()->GetRenderPos(vPos);
 	}
 
-	Rectangle(hdc
-		, (int)vPos.x
-		, (int)vPos.y
-		, (int)(vPos.x + vScale.x)
-		, (int)(vPos.y + vScale.y)); 
+	if (m_bLbtnDown)
+	{
+		SelectGDI select(hdc, PEN_TYPE::GREEN);
+
+		Rectangle(hdc
+			, (int)vPos.x
+			, (int)vPos.y
+			, (int)(vPos.x + vScale.x)
+			, (int)(vPos.y + vScale.y));
+	}
+	else
+	{
+		Rectangle(hdc
+			, (int)vPos.x
+			, (int)vPos.y
+			, (int)(vPos.x + vScale.x)
+			, (int)(vPos.y + vScale.y));
+	}
 
 	Render_Child(hdc);
 }
