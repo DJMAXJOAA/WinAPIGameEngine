@@ -14,6 +14,16 @@ CTile::~CTile()
 {
 }
 
+void CTile::Save(FILE* _pFile)
+{
+	fwrite(&m_iImgIndex, sizeof(int), 1, _pFile);
+}
+
+void CTile::Load(FILE* _pFile)
+{
+	fread(&m_iImgIndex, sizeof(int), 1, _pFile);
+}
+
 void CTile::Update()
 {
 }

@@ -14,6 +14,10 @@ public:
     void SetTexture(CTexture* _pTex) { m_pTileTex = _pTex; }
     void AddImageIndex() { m_iImgIndex++; }
 
+public:
+    virtual void Save(FILE* _pFile);
+    virtual void Load(FILE* _pFile);
+
 private:
     virtual void Update();
     virtual void Render(HDC hdc);

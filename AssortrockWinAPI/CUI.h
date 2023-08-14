@@ -20,7 +20,7 @@ public:
     virtual ~CUI();
 
     friend class CUIMgr;
-    CLONE(CUI);
+    virtual CUI* Clone() = 0;
 
 public:
     CUI* GetParent() { return m_pParentUI; }
@@ -35,7 +35,6 @@ public:
 
 public:
     virtual void MouseOn();             // 마우스가 UI 위에 있음
-
     virtual void MouseLbtnDown();       // 마우스가 UI 위에서 눌림
     virtual void MouseLbtnUp();         // 마우스가 UI 위에서 떼짐 ( ex : 드래그 상황 )
     virtual void MouseLbtnClicked();    // 마우스가 UI 위에서 눌렸으면서 + 뗄 떼도 UI 위에도 있음

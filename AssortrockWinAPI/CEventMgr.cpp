@@ -2,6 +2,7 @@
 #include "CEventMgr.h"
 
 #include "CSceneMgr.h"
+#include "CUIMgr.h"
 
 #include "CObject.h"
 #include "CScene.h"
@@ -55,6 +56,7 @@ void CEventMgr::Excute(const tEvent& _eve)
 	{
 		// lParam :: Next Scene Type
 		CSceneMgr::GetInstance()->ChangeScene((SCENE_TYPE)_eve.lParam);
+		CUIMgr::GetInstance()->SetFocusedUI(nullptr);
 	}
 		break;
 	case EVENT_TYPE::END:

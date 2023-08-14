@@ -9,6 +9,7 @@
 #include "CUI.h"
 
 CUIMgr::CUIMgr()
+	: m_pFocusedUI(nullptr)
 {
 }
 
@@ -18,40 +19,81 @@ CUIMgr::~CUIMgr()
 
 void CUIMgr::Update()
 {
-	CScene* pCurScnce = CSceneMgr::GetInstance()->GetCurScene();
-	const vector<CObject*>& vecUI = pCurScnce->GetGroupObject(GROUP_TYPE::UI);	// 가장 최상위 부모들만 UI에 넣어져 있음
+	// 1. Focused UI 확인하기 (두개의 창이 둘다 update받아버리면 안댐)
+	// 기존에 있던 애를 포커싱하면 되는지, 새로운 ui를 포커싱해야하는지 결정
+	m_pFocusedUI = GetFocusedUI();
+
+	if (!m_pFocusedUI)
+		return;		// 이벤트를 줄 ui가 없음
+
+	// 2. focusui 내에서 부모 ui 포함, 자식 ui들 중에서 실제 타겟팅 ui
+	CUI* pTargetUI = GetTargetedUI(m_pFocusedUI);
 
 	bool bLbtnTap = KEY_TAP(KEY::LBTN);
 	bool bLbtnAway = KEY_AWAY(KEY::LBTN);
 
-	for (size_t i = 0; i < vecUI.size(); i++)
+	if (pTargetUI != nullptr)
 	{
-		CUI* pUI = (CUI*)vecUI[i];	// vector가 cobject형태로 받아왔으니 다운캐스팅
+		pTargetUI->MouseOn();
 
-		pUI = GetTargetedUI(pUI);	// 제일 낮은 계층의 UI를 우선적으로 탐색한다
-		if (pUI != nullptr)
+		if (bLbtnTap)
 		{
-			pUI->MouseOn();
+			pTargetUI->MouseLbtnDown();
+			pTargetUI->m_bLbtnDown = true;
+		}
+		else if (bLbtnAway)
+		{
+			pTargetUI->MouseLbtnUp();
 
-			if (bLbtnTap)
+			// UI 버튼 위에서 눌렀었고, 그 뒤에 UI 버튼 위에서 뗐었으면 추가 호출
+			if (pTargetUI->m_bLbtnDown)
 			{
-				pUI->MouseLbtnDown();
-				pUI->m_bLbtnDown = true;
+				pTargetUI->MouseLbtnClicked();
 			}
-			else if (bLbtnAway)
-			{
-				pUI->MouseLbtnUp();
 
-				// UI 버튼 위에서 눌렀었고, 그 뒤에 UI 버튼 위에서 뗐었으면 추가 호출
-				if (pUI->m_bLbtnDown)
-				{
-					pUI->MouseLbtnClicked();
-				}
-
-				pUI->m_bLbtnDown = false;
-			}
+			pTargetUI->m_bLbtnDown = false;
 		}
 	}
+}
+
+CUI* CUIMgr::GetFocusedUI()
+{
+	CScene* pCurScene = CSceneMgr::GetInstance()->GetCurScene();
+	vector<CObject*>& vecUI = pCurScene->GetUIGroup();
+
+	bool bLbnTap = KEY_TAP(KEY::LBTN);
+	if (!bLbnTap)
+		return m_pFocusedUI;
+
+	// 기존 포커싱된 UI를 기본값으로 반환, 변경점 있으면 수정해서 반환하기
+	CUI* pFocusedUI = m_pFocusedUI;
+
+	// 왼쪽 버튼이 tap이 발생됐다는 전제하에, 뒤에서부터 검색(뒤에부터 우선순위가 높으니까)
+	vector<CObject*>::iterator targetIter = vecUI.end();	// 끝까지 검색햇는데 end 유지 -> 포커싱 ui가 없음
+	vector<CObject*>::iterator iter = vecUI.begin();
+
+	for (; iter != vecUI.end(); ++iter)
+	{
+		if (((CUI*)*iter)->IsMouseOn())
+		{
+			targetIter = iter;
+		}
+	}
+
+	// 만약에 다검사했는데 포커싱 ui가 없으면
+	if (vecUI.end() == targetIter)
+	{
+		return nullptr;
+	}
+
+	// 지우기전에 미리 복사해서 받아놓기
+	pFocusedUI = (CUI*)*targetIter;
+
+	// 벡터 내에서 맨 뒤로 순번 교체 -> 가장 높은 우선순위로
+	vecUI.erase(targetIter);
+	vecUI.push_back(pFocusedUI);
+
+	return pFocusedUI;
 }
 
 CUI* CUIMgr::GetTargetedUI(CUI* _pParentUI)
@@ -111,4 +153,34 @@ CUI* CUIMgr::GetTargetedUI(CUI* _pParentUI)
 	}
 
 	return pTargetUI;
+}
+
+void CUIMgr::SetFocusedUI(CUI* _pUI)
+{
+	// 이미 포커싱 중인 ui 혹은 포커싱 해제 요청
+	if (m_pFocusedUI == _pUI || _pUI == nullptr)
+	{
+		m_pFocusedUI = _pUI;
+		return;
+	}
+
+	m_pFocusedUI = _pUI;
+
+	// 우선순위 변경 (제일 위로)
+	CScene* pCurScene = CSceneMgr::GetInstance()->GetCurScene();
+	vector<CObject*>& vecUI = pCurScene->GetUIGroup();
+
+	vector<CObject*>::iterator iter = vecUI.begin();
+
+	for (; iter != vecUI.end(); ++iter)
+	{
+		if (m_pFocusedUI == *iter)
+		{
+			break;
+		}
+	}
+
+	// 벡터 내에서 맨 뒤로 순번 교체 -> 가장 높은 우선순위로 갱신
+	vecUI.erase(iter);
+	vecUI.push_back(m_pFocusedUI);
 }

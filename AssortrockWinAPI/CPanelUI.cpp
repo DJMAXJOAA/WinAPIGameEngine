@@ -14,6 +14,16 @@ CPanelUI::~CPanelUI()
 
 }
 
+void CPanelUI::Update()
+{
+	
+}
+
+void CPanelUI::Render(HDC hdc)
+{
+	CUI::Render(hdc);	// 사용은 부모의 Render를 사용, 디버깅 확인하기 어려우니까
+}
+
 void CPanelUI::MouseOn()
 {
 	// 패널UI는 드래그 기능을 추가시켜준다

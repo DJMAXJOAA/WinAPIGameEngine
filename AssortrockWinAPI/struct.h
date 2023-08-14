@@ -5,15 +5,19 @@ struct Vec2
 	float x;
 	float y;
 public:
+	bool IsZero()
+	{
+		if (x == 0.f && y == 0.f)
+			return true;
+		return false;
+	}
+
 	float Length() { return (float)sqrt(pow(x, 2) + pow(y, 2)); }
 
 	Vec2& Normalize()
 	{
 		float fLen = Length();
-
 		// 0으로 나누거나, 곱하는 경우를 없애야 한다(예외처리) -> 연산이 복잡해진다
-		if (fLen == 0.f)
-			fLen += 0.001f;
 
 		x /= fLen;
 		y /= fLen;

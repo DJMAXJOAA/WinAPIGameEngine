@@ -3,6 +3,7 @@
 
 #include "CResMgr.h"
 #include "CKeyMgr.h"
+#include "CPathMgr.h"
 
 #include "CObject.h"
 #include "CTile.h"
@@ -92,6 +93,8 @@ void CScene::DeleteAll()
 
 void CScene::CreateTile(UINT _iXCount, UINT _iYCount)
 {
+	DeleteGroup(GROUP_TYPE::TILE);
+
 	m_iTileX = _iXCount;
 	m_iTileY = _iYCount;
 
@@ -109,4 +112,37 @@ void CScene::CreateTile(UINT _iXCount, UINT _iYCount)
 			AddObject(pTile, GROUP_TYPE::TILE);
 		}
 	}
+}
+
+void CScene::LoadTile(const wstring& _strRelativePath)
+{
+	wstring strFilePath = CPathMgr::GetInstance()->GetContentPath();
+	strFilePath += _strRelativePath;	// 진짜 경로
+
+	// 커널 오브젝트 -> 직접 닫아주지 않고, 파일 포인터들을 닫아주는거
+	// 파일 스트림이 각각의 파일 포인터들
+	FILE* pFile = nullptr;
+	_wfopen_s(&pFile, strFilePath.c_str(), L"rb");		// 파일 커널 오브젝트, 경로, 쓰기읽기(w -> 쓰기, r -> 읽기, wb, rb -> 바이너리로 쓰기읽기)
+	assert(pFile);
+
+	//데이터 불러오기===========================================================================================
+
+	UINT xCount;
+	UINT yCount;
+
+	fread(&xCount, sizeof(UINT), 1, pFile);			// 시작 주소, 사이즈, 요소 갯수(배열이면 1이상도 ㅇ), 저장경로
+	fread(&yCount, sizeof(UINT), 1, pFile);
+
+	CreateTile(xCount, yCount);
+
+	const vector<CObject*>& vecTile = GetGroupObject(GROUP_TYPE::TILE);
+
+	for (size_t i = 0; i < vecTile.size(); i++)
+	{
+		((CTile*)vecTile[i])->Load(pFile);
+	}
+
+	//데이터 불러오기===========================================================================================
+
+	fclose(pFile);
 }

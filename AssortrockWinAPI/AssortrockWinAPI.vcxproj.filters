@@ -14,9 +14,6 @@
     <Filter Include="Engine\02. Core">
       <UniqueIdentifier>{6ca8e261-556a-4de9-abcf-c7261576c220}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\01. Header">
-      <UniqueIdentifier>{b1e05879-024d-4312-9304-4f045fe97074}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\03. Manager">
       <UniqueIdentifier>{9a794b59-a14f-45c8-9da4-d1899e9a3d43}</UniqueIdentifier>
     </Filter>
@@ -74,9 +71,6 @@
     <Filter Include="Engine\03. Manager\Key">
       <UniqueIdentifier>{82fb9553-9758-484a-a449-01b910dfb9ee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\03. Manager\Path">
-      <UniqueIdentifier>{a8ffc337-22de-47a9-9cb0-082a0985ac39}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\03. Manager\Resource">
       <UniqueIdentifier>{8048fd14-8c5b-4e73-9f26-5aea43c1d7a4}</UniqueIdentifier>
     </Filter>
@@ -103,6 +97,12 @@
     </Filter>
     <Filter Include="Engine\04. Object\UI\BtnUI">
       <UniqueIdentifier>{0e8d131d-88ab-4d4e-87f3-bf4749a06d5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\01. Header">
+      <UniqueIdentifier>{b1e05879-024d-4312-9304-4f045fe97074}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Manager\Path">
+      <UniqueIdentifier>{a8ffc337-22de-47a9-9cb0-082a0985ac39}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

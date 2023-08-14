@@ -11,6 +11,12 @@ public:
     CPanelUI();
     ~CPanelUI();
 
+    CLONE(CPanelUI);    
+
+public:
+    virtual void Update();
+    virtual void Render(HDC hdc);
+
 public:
     virtual void MouseOn();
     virtual void MouseLbtnDown();

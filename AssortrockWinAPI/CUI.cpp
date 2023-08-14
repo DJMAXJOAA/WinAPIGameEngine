@@ -14,7 +14,8 @@ CUI::CUI(bool _bCamAff)
 }
 
 CUI::CUI(const CUI& _origin)
-	: m_pParentUI(nullptr)
+	: CObject(_origin)
+	, m_pParentUI(nullptr)
 	, m_bCamAffected(_origin.m_bCamAffected)
 	, m_bMouseOn(false)
 	, m_bLbtnDown(false)
