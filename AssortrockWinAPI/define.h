@@ -27,8 +27,8 @@ return &mgr;\
 enum class GROUP_TYPE
 {
 	DEFAULT,
-	PLAYER,
 	MONSTER,
+	PLAYER,
 	MISSILE_PLAYER,
 	MISSILE_MONSTER,
 	TILE,
@@ -68,4 +68,14 @@ enum class EVENT_TYPE
 	SCENE_CHANGE,
 
 	END,
+};
+
+enum class MON_STATE
+{
+	IDLE,
+	PATROL,
+	TRACE,
+	ATT,
+	RUN,
+	DEAD,
 };

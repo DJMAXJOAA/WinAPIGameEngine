@@ -104,6 +104,30 @@
     <Filter Include="Engine\03. Manager\Path">
       <UniqueIdentifier>{a8ffc337-22de-47a9-9cb0-082a0985ac39}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\04. Object\UI\PanelUI\DebugPanel">
+      <UniqueIdentifier>{db6d22d7-ba99-4365-8fab-e70b84c0b00f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\08. Module\GDI">
+      <UniqueIdentifier>{56f89b62-bfb0-44d7-a5de-91c0192fa22d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\08. Module\AI">
+      <UniqueIdentifier>{8b893f3e-4ca3-448f-acb9-fe76fce2147a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\08. Module\AI\State">
+      <UniqueIdentifier>{4aa13abb-4c78-4c8a-8a9a-df7a558c68f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\08. Module\AI\State\Idle">
+      <UniqueIdentifier>{ed6117b1-a0cc-462a-b991-3310a0ee8d55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\08. Module\AI\State\Patrol">
+      <UniqueIdentifier>{236c7d06-efc3-4c9c-88bf-24567a5d489d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\08. Module\AI\State\Trace">
+      <UniqueIdentifier>{aae0f61e-0c57-4ba3-8f02-f8a3bc307f6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\08. Module\AI\State\Attack">
+      <UniqueIdentifier>{d48e76fe-4663-4cf6-8ef7-63a6f18345bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssortrockWinAPI.h">
@@ -170,9 +194,6 @@
     <ClInclude Include="CResMgr.h">
       <Filter>Engine\03. Manager\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="SelectGDI.h">
-      <Filter>Engine\08. Module</Filter>
-    </ClInclude>
     <ClInclude Include="CCollisionMgr.h">
       <Filter>Engine\03. Manager\Collision</Filter>
     </ClInclude>
@@ -211,6 +232,21 @@
     </ClInclude>
     <ClInclude Include="CBtnUI.h">
       <Filter>Engine\04. Object\UI\BtnUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectGDI.h">
+      <Filter>Engine\08. Module\GDI</Filter>
+    </ClInclude>
+    <ClInclude Include="AI.h">
+      <Filter>Engine\08. Module\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="CState.h">
+      <Filter>Engine\08. Module\AI\State</Filter>
+    </ClInclude>
+    <ClInclude Include="CIdleState.h">
+      <Filter>Engine\08. Module\AI\State\Idle</Filter>
+    </ClInclude>
+    <ClInclude Include="CTraceState.h">
+      <Filter>Engine\08. Module\AI\State\Trace</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -260,9 +296,6 @@
     <ClCompile Include="CResMgr.cpp">
       <Filter>Engine\03. Manager\Resource</Filter>
     </ClCompile>
-    <ClCompile Include="SelectGDI.cpp">
-      <Filter>Engine\08. Module</Filter>
-    </ClCompile>
     <ClCompile Include="CCollisionMgr.cpp">
       <Filter>Engine\03. Manager\Collision</Filter>
     </ClCompile>
@@ -301,6 +334,21 @@
     </ClCompile>
     <ClCompile Include="CBtnUI.cpp">
       <Filter>Engine\04. Object\UI\BtnUI</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectGDI.cpp">
+      <Filter>Engine\08. Module\GDI</Filter>
+    </ClCompile>
+    <ClCompile Include="AI.cpp">
+      <Filter>Engine\08. Module\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="CState.cpp">
+      <Filter>Engine\08. Module\AI\State</Filter>
+    </ClCompile>
+    <ClCompile Include="CIdleState.cpp">
+      <Filter>Engine\08. Module\AI\State\Idle</Filter>
+    </ClCompile>
+    <ClCompile Include="CTraceState.cpp">
+      <Filter>Engine\08. Module\AI\State\Trace</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,22 @@
 
 class CObject;
 
+class CTexture;
+
+enum class CAM_EFFECT
+{
+	FADE_IN,
+	FADE_OUT,
+	NONE,
+};
+
+struct tCamEffect
+{
+	CAM_EFFECT	eEffect;		// 카메라 효과
+	float		fDuration;	// 효과 최대 진행시간
+	float		fCurTime;		// 카메라 효과 현재 진행시간
+};
+
 class CCamera
 {
 	SINGLE(CCamera);
@@ -22,8 +38,11 @@ private:
 	bool		m_bVibrating;	// 카메라 진동중
 	float		m_fVTime;		// 진동 간격
 	int			m_iVibrate;		// 목표 진동 횟수
-	int			m_icurVibrate;	// 현재 진동 횟수
+	int			m_iCurVibrate;	// 현재 진동 횟수
 	int			m_iVibeCount;	// 1단계, 2단계, 3단계
+
+	list<tCamEffect>	m_listCamEffect;	// 페이드인, 페이드아웃이 연속적으로 진행될 수 있게 배열에 저장해두기
+	CTexture*	m_pVeilTex;		// 가림막 텍스쳐 (검은색 -> fade in, fade out)
 
 public:
 	CCamera();
@@ -46,7 +65,34 @@ public:
 	void SetVibrateCamera(float _fPower, int _iVibrate, float _fTime);
 
 public:
+	void FadeIn(float _fDuration)
+	{
+		tCamEffect ef = {};
+		ef.eEffect = CAM_EFFECT::FADE_IN;
+		ef.fDuration = _fDuration;
+		ef.fCurTime = 0.f;
+		if (ef.fDuration == 0.f)
+			assert(nullptr);
+
+		m_listCamEffect.push_back(ef);
+	}
+
+	void FadeOut(float _fDuration) 
+	{ 
+		tCamEffect ef = {};
+		ef.eEffect = CAM_EFFECT::FADE_OUT;
+		ef.fDuration = _fDuration;
+		ef.fCurTime = 0.f;
+		if (ef.fDuration == 0.f)
+			assert(nullptr);
+		
+		m_listCamEffect.push_back(ef);
+	}
+
+public:
+	void Init();
 	void Update();
+	void Render(HDC hdc);
 
 private:
 	void CalDiif();

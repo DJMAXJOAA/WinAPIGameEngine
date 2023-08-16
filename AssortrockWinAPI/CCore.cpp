@@ -9,26 +9,24 @@
 #include "CEventMgr.h"
 #include "CCamera.h"
 #include "CUIMgr.h"
+#include "CResMgr.h"
 
+#include "CTexture.h"
 #include "CObject.h"
 
 CCore::CCore()
 	: m_hWnd(0)
 	, m_ptResolution{}
 	, m_hDC(0)
-	, m_hBit(0)
-	, m_memDC(0)
 	, m_arrBrush{}
 	, m_arrPen{}
+	, m_pMemTex(nullptr)
 {
 }
 
 CCore::~CCore()
 {
 	ReleaseDC(m_hWnd, m_hDC);
-
-	DeleteDC(m_memDC);
-	DeleteObject(m_hBit);
 
 	// 자주사용하는 펜 등록했던거 지워주기
 	for (int i = 0; i < (UINT)PEN_TYPE::END; i++)
@@ -61,12 +59,8 @@ int CCore::Init(HWND hWnd, POINT ptResolution)
 
 	m_hDC = GetDC(m_hWnd);
 
-	// 더블 버퍼링 용도의 비트맵과 DC 만들기
-	m_hBit = CreateCompatibleBitmap(m_hDC, m_ptResolution.x, m_ptResolution.y); // 전체 화면 해상도 가져오기
-	m_memDC = CreateCompatibleDC(m_hDC); // hdc와 동일한 dc 가져오기
-
-	HBITMAP hOldBit = (HBITMAP)SelectObject(m_memDC, m_hBit); // dc와 비트맵 지정해 주기(반환값은 픽셀 1, 의미X)
-	DeleteObject(hOldBit); // 반환값인 hOldBit(원래 사용하던 비트맵)은 바로 지워준다(존재하는 의미가 없음)
+	// 더블 버퍼링 용도의 텍스쳐 생성
+	m_pMemTex = CResMgr::GetInstance()->CreateTexture(L"BackBuffer", (UINT)m_ptResolution.x, (UINT)m_ptResolution.y);
 
 	// 자주 사용되는 브러시와 펜 배열을 생성
 	CreateBrushPen();
@@ -75,6 +69,7 @@ int CCore::Init(HWND hWnd, POINT ptResolution)
 	CPathMgr::GetInstance()->Init();
 	CTimeMgr::GetInstance()->Init();
 	CKeyMgr::GetInstance()->Init();
+	CCamera::GetInstance()->Init();		// 씬매니저보다 먼저
 	CSceneMgr::GetInstance()->Init();
 
 	return S_OK;
@@ -93,12 +88,13 @@ void CCore::Progress()
 	CUIMgr::GetInstance()->Update();
 
 	// 렌더링 과정====================================================
-	Rectangle(m_memDC, -1, -1, m_ptResolution.x + 1, m_ptResolution.y + 1); // 화면 클리어
+	Rectangle(m_pMemTex->GetDC(), -1, -1, m_ptResolution.x + 1, m_ptResolution.y + 1); // 화면 클리어
 
-	CSceneMgr::GetInstance()->Render(m_memDC); // 화면 그리기
+	CSceneMgr::GetInstance()->Render(m_pMemTex->GetDC()); // 화면 그리기
+	CCamera::GetInstance()->Render(m_pMemTex->GetDC());
 
 	// 두번째 버퍼에서 첫번째 버퍼(실제로 표시되는 화면)에 복사->붙여넣기
-	BitBlt(m_hDC, 0, 0, m_ptResolution.x, m_ptResolution.y, m_memDC, 0, 0, SRCCOPY);
+	BitBlt(m_hDC, 0, 0, m_ptResolution.x, m_ptResolution.y, m_pMemTex->GetDC(), 0, 0, SRCCOPY);
 
 	CTimeMgr::GetInstance()->Render();
 

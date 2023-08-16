@@ -5,8 +5,10 @@
 #include "CCore.h"
 #include "CKeyMgr.h"
 #include "CTimeMgr.h"
+#include "CResMgr.h"
 
 #include "CObject.h"
+#include "CTexture.h"
 
 std::default_random_engine generator;
 std::uniform_real_distribution<float> distribution(-1.0, 1.0);
@@ -14,7 +16,18 @@ std::uniform_real_distribution<float> distribution(-1.0, 1.0);
 CCamera::CCamera()
 	: m_pTargetObj(nullptr)
 	, m_fTime(0.5f)
+
+	, m_fVTime(0)
+	, m_fSpeed(0)
+	, m_fAccTime(0)
+	, m_fAccSpeed(0)
+
+	, m_iVibrate(0)
+	, m_iVibeCount(0)
+	, m_iCurVibrate(0)
+
 	, m_bVibrating(false)
+	, m_pVeilTex(nullptr)
 {
 }
 
@@ -25,7 +38,7 @@ CCamera::~CCamera()
 void CCamera::VibrateCamera()
 {
 	// 목표 진동횟수 채워지면
-	if (m_iVibrate <= m_icurVibrate)
+	if (m_iVibrate <= m_iCurVibrate)
 	{
 		// 최종 위치로 맞춰주기 -> 화면 떨림 방지
 		m_bVibrating = false;
@@ -55,7 +68,7 @@ void CCamera::VibrateCamera()
 			{
 				m_vCurLookAt = m_vPrevLookAt + m_vRandom * m_fSpeed * fDT;
 				m_iVibeCount = 0;
-				m_icurVibrate++;
+				m_iCurVibrate++;
 				m_fAccTime = 0.f;
 
 				m_vRandom.x = distribution(generator);
@@ -82,7 +95,7 @@ void CCamera::SetVibrateCamera(float _fPower, int _iVibrate, float _fTime)
 	// 진동 세기, 진동 시간
 	m_fVTime = _fTime;
 	m_iVibrate = _iVibrate;
-	m_icurVibrate = 0;
+	m_iCurVibrate = 0;
 	m_iVibeCount = 0;
 	m_fSpeed = _fPower * 100.f;
 
@@ -91,6 +104,14 @@ void CCamera::SetVibrateCamera(float _fPower, int _iVibrate, float _fTime)
 	m_vRandom.Normalize();
 
 	m_bVibrating = true;
+}
+
+void CCamera::Init()
+{
+	Vec2 vResolution = CCore::GetInstance()->GetResolution();
+
+	// 이미 생성때부터 RGB(0,0,0) 검정임
+	m_pVeilTex = CResMgr::GetInstance()->CreateTexture(L"CameraVeil", (UINT)vResolution.x, (UINT)vResolution.y);
 }
 
 void CCamera::Update()
@@ -126,6 +147,57 @@ void CCamera::Update()
 
 	// 화면 중앙 좌표와 카메라 LookAt 좌표간의 차이값을 계산해준다
 	CalDiif();
+}
+
+void CCamera::Render(HDC hdc)
+{
+	// 페이드인, 페이드아웃 대기열이 끝나면
+	if (m_listCamEffect.empty())
+		return;
+
+	tCamEffect& effect = m_listCamEffect.front();
+	effect.fCurTime += fDT;
+
+	float fRatio = 0.f;	// 이펙트 진행 비율
+	fRatio = effect.fCurTime / effect.fDuration;
+
+	// 비율이 0과 1 사이로 들어가게 보정
+	if (fRatio < 0.f)
+		fRatio = 0.f;
+	if (fRatio > 1.f)
+		fRatio = 1.f;
+
+	int iAlpha = 0;
+	if (CAM_EFFECT::FADE_OUT == effect.eEffect)
+	{
+		iAlpha = (int)(255.f * fRatio);
+	}
+	else if (CAM_EFFECT::FADE_IN == effect.eEffect)
+	{
+		iAlpha = (int)(255.f * (1.f - fRatio));
+	}
+
+	BLENDFUNCTION bf = {};
+	bf.BlendOp = AC_SRC_OVER;
+	bf.BlendFlags = 0;
+	bf.AlphaFormat = 0;		// AC_SRC_ALPHA 이거 아님 0으로 수정 -> 전역채널이라 사용하면 안됨
+	bf.SourceConstantAlpha = iAlpha;
+
+	AlphaBlend(hdc
+		, 0
+		, 0
+		, m_pVeilTex->Width()
+		, m_pVeilTex->Height()
+		, m_pVeilTex->GetDC()
+		, 0, 0, m_pVeilTex->Width(), m_pVeilTex->Height()
+		, bf);
+
+	// 진행시간이 이펙트 최대 지정 시간을 넘어가면
+	if (effect.fDuration < effect.fCurTime)
+	{
+		m_listCamEffect.pop_front();
+		return;
+	}
 }
 
 void CCamera::CalDiif()

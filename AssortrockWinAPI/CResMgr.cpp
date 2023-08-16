@@ -37,6 +37,25 @@ CTexture* CResMgr::LoadTexture(const wstring& _strKey, const wstring& _strRelati
     return pTex;
 }
 
+CTexture* CResMgr::CreateTexture(const wstring& _strKey, UINT _iWidth, UINT _iHeight)
+{
+    // 키값과, 상대경로를 인자로 넣는다
+    // 중복된 키 값이 들어오면, 새로 만들어서 등록하는게 아니라, 먼저 검색 후 있으면 원래 있던거 반환
+    CTexture* pTex = FindTexture(_strKey);
+    if (pTex != nullptr)
+    {
+        return pTex;
+    }
+
+    pTex = new CTexture;
+    pTex->Create(_iWidth, _iHeight);
+    pTex->SetKey(_strKey);
+
+    m_mapTex.insert(make_pair(_strKey, pTex));
+
+    return pTex;
+}
+
 CTexture* CResMgr::FindTexture(const wstring& _strKey)
 {
     map<wstring, CRes*>::iterator iter = m_mapTex.find(_strKey); // 이터레이터 값으로 반환
