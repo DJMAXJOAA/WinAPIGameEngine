@@ -21,6 +21,7 @@ public:
 
 public:
 	void AddState(CState* _pState);
+	void SetCurState(MON_STATE _eState);
 
 public:
 	void Update();

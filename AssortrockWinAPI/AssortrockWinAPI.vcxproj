@@ -151,6 +151,7 @@
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CMissile.h" />
     <ClInclude Include="CMonster.h" />
+    <ClInclude Include="CMonsterFactory.h" />
     <ClInclude Include="CObject.h" />
     <ClInclude Include="CPanelUI.h" />
     <ClInclude Include="CPathMgr.h" />
@@ -191,6 +192,7 @@
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CMissile.cpp" />
     <ClCompile Include="CMonster.cpp" />
+    <ClCompile Include="CMonsterFactory.cpp" />
     <ClCompile Include="CObject.cpp" />
     <ClCompile Include="CPanelUI.cpp" />
     <ClCompile Include="CPathMgr.cpp" />

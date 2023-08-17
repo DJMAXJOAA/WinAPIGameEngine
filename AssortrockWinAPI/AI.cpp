@@ -1,7 +1,10 @@
 #include "pch.h"
 #include "AI.h"
 
+#include "CMonster.h"
+
 #include "CState.h"
+
 
 AI::AI()
 	: m_pCurState(nullptr)
@@ -33,6 +36,12 @@ void AI::AddState(CState* _pState)
 
 	m_mapState.insert(make_pair(_pState->GetType(), _pState));
 	_pState->m_pAI = this;
+}
+
+void AI::SetCurState(MON_STATE _eState)
+{
+	m_pCurState = GetState(_eState);
+	assert(m_pCurState);
 }
 
 void AI::Update()
